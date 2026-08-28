@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Suyambu | AI/ML Engineer &amp; Data Analyst</title>
+<meta name="description" content="Portfolio of Suyambu — AI/ML, NLP and Voice AI engineering: an end-to-end Tamil/Tanglish citizen complaint voice assistant, a Tamil BPE tokenizer built from scratch, and fake profile detection with XGBoost.">
+<meta name="author" content="Suyambu">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Suyambu | AI/ML Engineer &amp; Data Analyst">
+<meta property="og:description" content="End-to-end Voice AI, Tamil NLP and machine learning projects — architecture, methods and measured results.">
+<meta property="og:image" content="assets/favicon.svg">
+<meta name="twitter:card" content="summary">
+
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/styles.css">
+<script src="js/theme.js"></script>
+</head>
+
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="#top">Suyambu <span>· AI/ML Engineer</span></a>
+    <nav class="nav" aria-label="Primary">
+      <a href="#projects">Projects</a>
+      <a href="#skills" class="opt">Skills</a>
+      <a href="#experience" class="opt">Experience</a>
+      <a href="#github">GitHub</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="theme-toggle" type="button" hidden aria-label="Switch colour theme">☽</button>
+  </div>
+</header>
+
+<main id="main">
+<div id="top"></div>
+
+<!-- ============================ HERO ============================ -->
+<section class="hero">
+  <div class="wrap">
+    <h1>Suyambu</h1>
+    <p class="role">AI / ML Engineer &nbsp;|&nbsp; Data Analyst</p>
+    <p class="pitch">
+      I build AI systems that run end to end. My work spans a Tamil/Tanglish voice
+      assistant that carries a citizen's spoken complaint all the way to a routed,
+      ticketed record; a Byte Pair Encoding tokenizer written from scratch against
+      Tamil Unicode; and a fake-profile classifier evaluated against its own
+      majority-class baseline rather than accuracy alone. Python, machine learning,
+      NLP, speech, and the real-time backends that hold them together.
+    </p>
+
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#projects">View Projects</a>
+      <a class="btn" href="https://github.com/Suyambu567" rel="noopener">GitHub</a>
+      <a class="btn" href="#linkedin">LinkedIn</a>
+      <a class="btn" href="#contact">Contact Me</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ ABOUT ============================ -->
+<section id="about">
+  <div class="wrap">
+    <span class="eyebrow">About</span>
+    <h2>Three projects, one line of work</h2>
+    <p class="lede">
+      My background is in Python, machine learning and natural language processing,
+      and the three projects on this page were built in that order deliberately:
+      classical ML and feature engineering first, then Tamil-specific NLP at the
+      tokenizer level, then a complete voice application that needs both.
+    </p>
+    <p class="lede">
+      The Tamil work is the thread running through all of it. Code-mixed
+      Tamil–English speech breaks assumptions that hold for English: tokenizers
+      split Tamil grapheme clusters in the wrong places, and off-the-shelf ASR
+      models transliterate English words into Tamil script and corrupt everything
+      downstream. Working on those problems meant moving across the whole stack —
+      dataset preparation, model fine-tuning, real-time audio handling, dialogue
+      state, and the API and WebSocket layers that serve them.
+    </p>
+    <p class="lede">
+      I prefer measured results to adjectives. Where a number appears on this page
+      it was measured in the project it belongs to, and it is shown next to the
+      baseline or the caveat that makes it meaningful.
+    </p>
+  </div>
+</section>
+
+<!-- ============================ SKILLS ============================ -->
+<section id="skills">
+  <div class="wrap">
+    <span class="eyebrow">Technical skills</span>
+    <h2>Technologies used in the projects below</h2>
+    <p class="lede">
+      This list is restricted to what the three featured projects actually use.
+      Nothing is listed for familiarity alone.
+    </p>
+
+    <div class="skill-grid">
+      <div class="skill-card">
+        <h3>AI / LLM</h3>
+        <ul class="tags">
+          <li>LLM applications</li><li>Prompt engineering</li>
+          <li>Intent classification</li><li>Slot filling</li>
+          <li>Dialogue state management</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Machine learning</h3>
+        <ul class="tags">
+          <li>Scikit-learn</li><li>XGBoost</li><li>Random Forest</li>
+          <li>LoRA / PEFT fine-tuning</li><li>Class imbalance handling</li>
+          <li>Cross-validation</li><li>Model evaluation</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Speech &amp; NLP</h3>
+        <ul class="tags">
+          <li>Whisper</li><li>ASR</li><li>Text-to-speech</li>
+          <li>Voice activity detection</li><li>BPE tokenization</li>
+          <li>Tamil Unicode processing</li><li>Code-mixed (Tanglish) NLP</li>
+          <li>TF-IDF</li><li>Feature engineering</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Backend</h3>
+        <ul class="tags">
+          <li>Python</li><li>FastAPI</li><li>REST APIs</li>
+          <li>WebSocket</li><li>Pydantic</li><li>Real-time audio streaming</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Data</h3>
+        <ul class="tags">
+          <li>Pandas</li><li>NumPy</li><li>Data preprocessing</li>
+          <li>Feature extraction</li><li>Evaluation metrics</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Tools</h3>
+        <ul class="tags">
+          <li>Git</li><li>GitHub</li><li>GitHub Actions</li>
+          <li>pytest</li><li>YAML</li><li>JSON</li><li>VS Code</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ PROJECTS ============================ -->
+<section id="projects">
+  <div class="wrap">
+    <span class="eyebrow">Featured projects</span>
+    <h2>Three projects, in order of engineering scope</h2>
+    <p class="lede">
+      Each one answers the same questions: what problem it solves, how it solves it,
+      what was actually built, and what the evaluation showed.
+    </p>
+
+    <!-- ---------- 01 · HERO ---------- -->
+    <article class="project project-hero" id="voice-assistant">
+      <div class="project-head">
+        <span class="project-num">01</span>
+        <h3>Tamil/Tanglish Citizen Complaint Voice Assistant</h3>
+        <span class="badge">End-to-end Voice AI</span>
+      </div>
+      <p class="one-liner">
+        A citizen describes a local problem out loud in Tamil or Tanglish. The system
+        transcribes it, works out what the problem is and where it is, asks for the
+        detail it is missing, routes it to the right department, files it with a
+        ticket number, and reads the result back in spoken Tamil.
+      </p>
+
+      <div class="diagram">
+        <svg viewBox="0 0 720 250" role="img" aria-labelledby="pipe-title pipe-desc">
+          <title id="pipe-title">Voice assistant pipeline</title>
+          <desc id="pipe-desc">Citizen speech enters a Flutter app, streams over a WebSocket
+            to a Python voice server for voice activity detection and audio preprocessing,
+            is transcribed to text, classified into a complaint category, completed by
+            follow-up questions when details are missing, routed to a department with a
+            ticket number, and returned to the citizen as spoken Tamil.</desc>
+          <defs>
+            <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7"
+                    markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 z" class="d-arrow"/>
+            </marker>
+          </defs>
+
+          <!-- row 1 -->
+          <g>
+            <rect class="d-box-a" x="20"  y="26" width="120" height="54" rx="7"/>
+            <text class="d-label" x="80"  y="48" text-anchor="middle">Citizen speaks</text>
+            <text class="d-sub"   x="80"  y="64" text-anchor="middle">Tamil / Tanglish</text>
+
+            <rect class="d-box" x="160" y="26" width="120" height="54" rx="7"/>
+            <text class="d-label" x="220" y="48" text-anchor="middle">Flutter app</text>
+            <text class="d-sub"   x="220" y="64" text-anchor="middle">mobile client</text>
+
+            <rect class="d-box" x="300" y="26" width="120" height="54" rx="7"/>
+            <text class="d-label" x="360" y="48" text-anchor="middle">WebSocket</text>
+            <text class="d-sub"   x="360" y="64" text-anchor="middle">audio streaming</text>
+
+            <rect class="d-box" x="440" y="26" width="120" height="54" rx="7"/>
+            <text class="d-label" x="500" y="44" text-anchor="middle">Voice server</text>
+            <text class="d-sub"   x="500" y="58" text-anchor="middle">VAD 20 ms frames</text>
+            <text class="d-sub"   x="500" y="70" text-anchor="middle">+ preprocessing</text>
+
+            <rect class="d-box" x="580" y="26" width="120" height="54" rx="7"/>
+            <text class="d-label" x="640" y="48" text-anchor="middle">Speech-to-text</text>
+            <text class="d-sub"   x="640" y="64" text-anchor="middle">fine-tuned Whisper</text>
+          </g>
+
+          <path class="d-line" d="M140 53 H158"  marker-end="url(#ah)"/>
+          <path class="d-line" d="M280 53 H298"  marker-end="url(#ah)"/>
+          <path class="d-line" d="M420 53 H438"  marker-end="url(#ah)"/>
+          <path class="d-line" d="M560 53 H578"  marker-end="url(#ah)"/>
+
+          <!-- connector down to row 2 -->
+          <path class="d-line" d="M640 80 V100 Q640 108 632 108 H88 Q80 108 80 116 V148"
+                marker-end="url(#ah)"/>
+
+          <!-- row 2 -->
+          <g>
+            <rect class="d-box" x="20"  y="154" width="120" height="54" rx="7"/>
+            <text class="d-label" x="80"  y="176" text-anchor="middle">Intent + category</text>
+            <text class="d-sub"   x="80"  y="192" text-anchor="middle">24 issue types</text>
+
+            <rect class="d-box" x="160" y="154" width="120" height="54" rx="7"/>
+            <text class="d-label" x="220" y="170" text-anchor="middle">LLM</text>
+            <text class="d-sub"   x="220" y="184" text-anchor="middle">complaint</text>
+            <text class="d-sub"   x="220" y="196" text-anchor="middle">understanding</text>
+
+            <rect class="d-box" x="300" y="154" width="120" height="54" rx="7"/>
+            <text class="d-label" x="360" y="170" text-anchor="middle">Follow-up</text>
+            <text class="d-sub"   x="360" y="184" text-anchor="middle">asks for missing</text>
+            <text class="d-sub"   x="360" y="196" text-anchor="middle">area / street</text>
+
+            <rect class="d-box" x="440" y="154" width="120" height="54" rx="7"/>
+            <text class="d-label" x="500" y="176" text-anchor="middle">Routing + ticket</text>
+            <text class="d-sub"   x="500" y="192" text-anchor="middle">25 departments</text>
+
+            <rect class="d-box-a" x="580" y="154" width="120" height="54" rx="7"/>
+            <text class="d-label" x="640" y="170" text-anchor="middle">Tamil reply</text>
+            <text class="d-sub"   x="640" y="184" text-anchor="middle">text-to-speech</text>
+            <text class="d-sub"   x="640" y="196" text-anchor="middle">back to citizen</text>
+          </g>
+
+          <path class="d-line" d="M140 181 H158" marker-end="url(#ah)"/>
+          <path class="d-line" d="M280 181 H298" marker-end="url(#ah)"/>
+          <path class="d-line" d="M420 181 H438" marker-end="url(#ah)"/>
+          <path class="d-line" d="M560 181 H578" marker-end="url(#ah)"/>
+        </svg>
+      </div>
+
+      <div class="qa">
+        <div class="qa-block">
+          <h4>01 — Problem</h4>
+          <p>
+            Filing a civic complaint means a form: the right department, the right
+            category, an address written the way the system expects. A citizen who
+            would say <em>"enga area-la water problem irukku"</em> out loud has to
+            translate that into someone else's schema before anything happens. The
+            speech-first route removes the form, but only if the system can handle
+            how people actually talk — Tamil and English mixed inside a single
+            sentence.
+          </p>
+        </div>
+
+        <div class="qa-block">
+          <h4>02 — Solution</h4>
+          <p>
+            A spoken-dialogue system that takes a complaint from speech to a routed,
+            ticketed record without a form. Audio streams from a mobile client to a
+            Python voice server over a WebSocket; voice activity detection decides
+            when the citizen has finished speaking; the utterance is transcribed,
+            classified into one of 24 civic issue categories, and checked for the
+            details a complaint needs. When the area or street is missing, the
+            assistant asks for it and waits, rather than filing an incomplete record.
+            The finished complaint is mapped to one of 25 departments, stored with a
+            sequential ticket number, and read back in spoken Tamil.
+          </p>
+        </div>
+
+        <div class="qa-2col">
+          <div class="qa-block">
+            <h4>03 — Technology</h4>
+            <ul class="tight">
+              <li><strong>Client:</strong> Flutter mobile app</li>
+              <li><strong>Transport:</strong> WebSocket audio streaming</li>
+              <li><strong>Server:</strong> Python, asynchronous</li>
+              <li><strong>VAD:</strong> WebRTC VAD, 20&nbsp;ms frames</li>
+              <li><strong>ASR:</strong> Whisper-medium fine-tuned with LoRA, served through CTranslate2; cloud ASR providers as alternate routes</li>
+              <li><strong>Understanding:</strong> LLM provider plus a rule-based intent and location layer</li>
+              <li><strong>TTS:</strong> neural text-to-speech for the Tamil reply</li>
+              <li><strong>Testing:</strong> pytest; an offline harness drives the dialogue with text and asserts what was filed</li>
+            </ul>
+          </div>
+
+          <div class="qa-block">
+            <h4>04 — Engineering challenges</h4>
+            <ul class="tight">
+              <li><strong>Code-mixing broke every off-the-shelf ASR.</strong> Each engine
+                tested transliterated the English words into Tamil script, which corrupted
+                the routing stage downstream. The base Tamil Whisper model kept
+                <span class="mono">0 / 289</span> English words in Latin script.</li>
+              <li><strong>Turn-taking.</strong> Deciding when a speaker has stopped —
+                rather than paused — is what makes a voice assistant feel usable, and it
+                is handled at the VAD frame level.</li>
+              <li><strong>Incomplete complaints.</strong> Spontaneous speech rarely
+                contains everything a complaint needs, so the dialogue has to distinguish
+                a problem description from an area name and ask only for what is missing.</li>
+              <li><strong>Correctness that a crash test cannot catch.</strong> The failures
+                that matter are wrong <em>filed data</em> — a problem fragment parsed as an
+                area, an unroutable department — so the test harness asserts the resulting
+                record, not that the code ran.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="qa-block">
+          <h4>05 — Results (measured)</h4>
+          <p>
+            Fine-tuning the ASR on the deployment's own code-mixed speech is what
+            moved the system, after swapping pretrained models did not. Two rounds
+            of fine-tuning, each evaluated against the version it replaced:
+          </p>
+          <div class="table-scroll">
+            <table>
+              <caption>Speech recognition — measured on held-out clips from this project</caption>
+              <thead>
+                <tr>
+                  <th>Comparison</th><th class="num">WER</th><th class="num">CER</th>
+                  <th class="num">English words kept in Latin script</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Untrained base model → first fine-tune <span class="mono">(89 clips)</span></td>
+                  <td class="num">80.1% → <span class="win">55.0%</span></td>
+                  <td class="num">77.2% → <span class="win">39.4%</span></td>
+                  <td class="num">0% → <span class="win">37.4%</span></td>
+                </tr>
+                <tr>
+                  <td>First fine-tune → second fine-tune <span class="mono">(107 clips)</span></td>
+                  <td class="num">49.8% → <span class="win">46.6%</span></td>
+                  <td class="num">32.8% → <span class="win">30.8%</span></td>
+                  <td class="num">37.9% → <span class="win">38.5%</span></td>
+                </tr>
+                <tr>
+                  <td>Spontaneous citizen clips only <span class="mono">(9 clips)</span></td>
+                  <td class="num">83.8% → <span class="win">69.3%</span></td>
+                  <td class="num">—</td>
+                  <td class="num">—</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            Runtime, measured on the same evaluation: average <span class="mono">0.533&nbsp;s</span>,
+            p50 <span class="mono">0.474&nbsp;s</span>, p95 <span class="mono">1.091&nbsp;s</span>,
+            real-time factor <span class="mono">0.139</span>.
+          </p>
+          <div class="note">
+            <strong>Read the WER honestly.</strong> 46.6% is high in absolute terms.
+            Code-mixed Tanglish is punishing to score — a word written in the other
+            script counts as a whole error — so the meaningful figure is the gap
+            between two systems on the same clips under the same metric, not the
+            absolute value. District and area name recall remains unsolved at
+            <span class="mono">0 / 6</span> across both rounds.
+          </div>
+        </div>
+
+        <div class="qa-block">
+          <h4>06 — My contribution</h4>
+          <p class="mono" style="font-size:.8rem;color:var(--muted)">Implementation verified in the project repository:</p>
+          <ul class="tight">
+            <li>Real-time voice server: WebSocket audio ingestion, VAD-driven turn-taking, audio preprocessing ahead of transcription</li>
+            <li>Complaint dialogue: intent and category classification over 24 civic issue types, including a Tanglish keyword layer</li>
+            <li>Location understanding: area, street, sub-area and ward extraction with alias and fuzzy matching, plus the follow-up questioning that fills the gaps</li>
+            <li>Department routing across 25 departments, ticket numbering that survives restarts, and a query CLI over the filed complaints</li>
+            <li>ASR fine-tuning: dataset preparation from human-verified transcripts, LoRA training, evaluation harness, and the promotion gate on WER, CER and latency</li>
+            <li>Test suite covering turn-taking, transcription confidence gating, TTS caching and the dialogue itself</li>
+          </ul>
+          <p><span class="ph">[ADD YOUR SPECIFIC ROLE — team size and which components you personally owned]</span></p>
+        </div>
+
+        <div class="qa-block">
+          <h4>07 — Links</h4>
+          <div class="cta-row" style="margin-top:.4rem">
+            <a class="btn btn-primary" href="case-study-voice-assistant.html">View Case Study</a>
+            <span class="btn" aria-disabled="true" title="Private repository — source is not public">Private repository — code not public</span>
+            <span class="btn" aria-disabled="true"><span class="ph">[ADD PUBLIC DEMO OR WRITE-UP URL]</span></span>
+          </div>
+          <div class="note">
+            <p>This system was built in a private repository. No source code, internal
+            URLs, infrastructure details or citizen data appear on this site — only
+            architecture, methods and evaluation results.</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ---------- 02 · TAMIL TOKENIZER ---------- -->
+    <article class="project" id="tamil-tokenizer">
+      <div class="project-head">
+        <span class="project-num">02</span>
+        <h3>Tamil BPE Tokenizer — built from scratch</h3>
+        <span class="badge">Tamil NLP fundamentals</span>
+      </div>
+      <p class="one-liner">
+        Byte Pair Encoding implemented in plain Python — no tokenizer library — and
+        trained on Tamil text, to work out how subword merges behave on a script
+        where a written character is a consonant plus a vowel sign.
+      </p>
+
+      <div class="qa">
+        <div class="qa-2col">
+          <div class="qa-block">
+            <h4>01 — Problem</h4>
+            <p>
+              Tokenization decides what every downstream NLP model can see. Tamil makes
+              that harder than English: it is agglutinative, so one word carries case and
+              postpositions that English spreads over several words, and its script
+              composes characters from a consonant and a dependent vowel sign. Split at
+              the wrong boundary and the pieces are not linguistic units at all. Word-level
+              tokenization explodes the vocabulary; naive character-level tokenization
+              throws away structure.
+            </p>
+          </div>
+          <div class="qa-block">
+            <h4>02 — Approach</h4>
+            <p>
+              Byte Pair Encoding, written from first principles rather than called from a
+              library, so the merge behaviour is inspectable at every step: build the
+              character-level vocabulary, count adjacent symbol pairs, merge the most
+              frequent pair, repeat. The trained merge rules are persisted as JSON and
+              reloaded for encoding, and a separate vocabulary component maps tokens to
+              integer IDs and back.
+            </p>
+          </div>
+        </div>
+
+        <div class="qa-block">
+          <h4>03 — What the model learned</h4>
+          <p>
+            Trained for 50 merges, the first rules the algorithm found are exactly the
+            units Tamil orthography is built from — a consonant joined to its pulli, and
+            a consonant joined to its vowel sign:
+          </p>
+          <div class="io">
+            merge 1 &nbsp;<span class="arrow">→</span>&nbsp; ('ன', '்') &nbsp;→&nbsp; ன்<br>
+            merge 2 &nbsp;<span class="arrow">→</span>&nbsp; ('ர', 'ு') &nbsp;→&nbsp; ரு<br>
+            merge 5 &nbsp;<span class="arrow">→</span>&nbsp; ('க', '்') &nbsp;→&nbsp; க்<br>
+            merge 6 &nbsp;<span class="arrow">→</span>&nbsp; ('க்', 'க') &nbsp;→&nbsp; க்க
+          </div>
+          <p>
+            Nothing in the code knows anything about Tamil grammar — the merges are
+            driven purely by frequency, and they converge on the writing system's own
+            building blocks.
+          </p>
+        </div>
+
+        <div class="qa-block">
+          <h4>04 — Example input and output</h4>
+          <p>Produced by loading the trained merge rules and encoding:</p>
+          <div class="io">
+            "நான் பள்ளிக்கு" <span class="arrow">→</span> ['நான்', 'பள்ளிக்கு'] <span class="d-sub">— 2 tokens</span><br>
+            "நான் இன்று பள்ளிக்கு சென்றேன்" <span class="arrow">→</span> ['நான்', 'இன்று', 'பள்ளிக்கு', 'சென்றேன்'] <span class="d-sub">— 4 tokens</span><br>
+            "தமிழ் ஒரு அழகான மொழி" <span class="arrow">→</span> ['தமிழ்', 'ஒரு', 'அழகான', 'மொழ', 'ி'] <span class="d-sub">— 5 tokens</span>
+          </div>
+          <p>
+            The third line is the interesting one. Words the tokenizer saw during
+            training collapse into single tokens, while <span class="mono">மொழி</span> —
+            which it did not finish learning — splits into
+            <span class="mono">மொழ</span> + <span class="mono">ி</span>. That is BPE
+            overfitting a small corpus, visible in one line of output: with enough merges
+            relative to the data, the model memorises whole words instead of learning
+            reusable subwords, and only unseen text reveals it.
+          </p>
+        </div>
+
+        <div class="qa-2col">
+          <div class="qa-block">
+            <h4>05 — My contribution</h4>
+            <p class="mono" style="font-size:.8rem;color:var(--muted)">Implementation verified in the repository:</p>
+            <ul class="tight">
+              <li>The BPE trainer end to end — vocabulary construction, pair statistics, best-pair selection, merge application, and the training loop</li>
+              <li>Encoder that replays learned merges over unseen text, and the decoder</li>
+              <li>Model persistence: merge rules saved to and loaded from JSON with Unicode preserved</li>
+              <li>Tamil Unicode validator over the U+0B80–U+0BFF block, and a character-level tokenizer for comparison</li>
+              <li>Vocabulary component with token↔ID mapping and its own save/load</li>
+              <li>YAML-driven configuration and corpus loading, so a training run is reproducible from config</li>
+            </ul>
+            <p><span class="ph">[ADD YOUR SPECIFIC ROLE IF THIS WAS TEAM WORK]</span></p>
+          </div>
+
+          <div class="qa-block">
+            <h4>06 — Scope and limits</h4>
+            <div class="note">
+              <p>
+                <strong>This is a fundamentals project, not a production tokenizer.</strong>
+                It was trained on a small demonstration corpus for 50 merges. It carries no
+                benchmark against SentencePiece or any other tokenizer, and no evaluation
+                metrics — because none were measured, and inventing them would defeat the
+                point of the exercise. What it demonstrates is the algorithm implemented
+                correctly from scratch and applied to Tamil script.
+              </p>
+            </div>
+            <h4 style="margin-top:1rem">07 — Technology</h4>
+            <ul class="tags">
+              <li>Python</li><li>BPE</li><li>Tamil Unicode</li>
+              <li>NLP preprocessing</li><li>YAML</li><li>JSON</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="qa-block">
+          <h4>08 — Links</h4>
+          <div class="cta-row" style="margin-top:.4rem">
+            <span class="btn" aria-disabled="true"><span class="ph">[ADD TAMIL TOKENIZER GITHUB URL]</span></span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ---------- 03 · FAKE USER DETECTION ---------- -->
+    <article class="project" id="fake-user-detection">
+      <div class="project-head">
+        <span class="project-num">03</span>
+        <h3>Fake User Detection</h3>
+        <span class="badge">ML / NLP</span>
+      </div>
+      <p class="one-liner">
+        A binary classifier that separates fake social profiles from real ones using
+        profile, behavioural and textual features — served through a REST API, with a
+        second model that runs entirely in the browser.
+      </p>
+
+      <div class="qa">
+        <div class="qa-2col">
+          <div class="qa-block">
+            <h4>01 — Problem</h4>
+            <p>
+              Fake profiles spread misinformation, run fraud and inflate social influence.
+              Detecting them from account metadata alone is a classification problem over
+              mixed feature types — and the classes are imbalanced, because fake accounts
+              are the rarer class. That makes accuracy on its own useless as a measure of
+              success: a model that guesses the majority class every time already scores
+              well above 50%.
+            </p>
+          </div>
+          <div class="qa-block">
+            <h4>02 — Approach</h4>
+            <p>
+              A full pipeline: cleaning and de-duplication, feature engineering across
+              three feature families, encoding and scaling inside a fitted pipeline,
+              class-imbalance handling applied only after the train/test split, then
+              gradient-boosted trees. Every accuracy figure is reported next to the
+              majority-class baseline, and the difference between them — the lift — is
+              treated as the real result.
+            </p>
+          </div>
+        </div>
+
+        <div class="qa-block">
+          <h4>03 — Features and NLP</h4>
+          <div class="qa-2col">
+            <div>
+              <ul class="tight">
+                <li><strong>Profile:</strong> has a profile picture, full-name word count and length, digit-to-length ratio in the name, bio length, presence of an external URL</li>
+                <li><strong>Behavioural:</strong> post count, follower count, follow count — the follow ratio and whether engagement matches audience size</li>
+              </ul>
+            </div>
+            <div>
+              <ul class="tight">
+                <li><strong>Textual (NLP):</strong> the bio, vectorised with TF-IDF inside the same fitted pipeline as the numeric features</li>
+                <li><strong>Encoding:</strong> a ColumnTransformer combining standard scaling, TF-IDF over the bio, and one-hot encoding for categorical fields</li>
+              </ul>
+            </div>
+          </div>
+          <p>
+            Training and serving call one shared feature-building function, so a feature
+            cannot be computed one way at fit time and another way at request time — and
+            a test asserts the two feature frames are identical, column for column. Where
+            an optional field is omitted from a request, the value is imputed and the
+            response reports which fields were imputed.
+          </p>
+        </div>
+
+        <div class="qa-block">
+          <h4>04 — Evaluation</h4>
+          <div class="table-scroll">
+            <table>
+              <caption>XGBoost — 40,000 training / 10,000 held-out test profiles, stratified split</caption>
+              <thead>
+                <tr>
+                  <th class="num">Accuracy</th><th class="num">Majority baseline</th>
+                  <th class="num">Lift</th><th class="num">Precision</th>
+                  <th class="num">Recall</th><th class="num">F1</th>
+                  <th class="num">ROC-AUC</th><th class="num">CV (5-fold)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="num win">0.9409</td><td class="num">0.6337</td>
+                  <td class="num win">+0.3072</td><td class="num">0.9349</td>
+                  <td class="num">0.9014</td><td class="num">0.9179</td>
+                  <td class="num">0.9331</td><td class="num">0.9400 ± 0.0018</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            A second, smaller Random Forest was exported to JSON and re-implemented in
+            JavaScript so the same classification runs entirely in the browser with no
+            backend and no network calls: accuracy <span class="mono">0.9342</span>
+            against a <span class="mono">0.6312</span> baseline, cross-validated at
+            <span class="mono">0.9367 ± 0.0028</span>, in a 256&nbsp;KB model file.
+          </p>
+          <div class="note">
+            <strong>Both models are evaluated on synthetic data.</strong> The dataset is
+            produced by a generator that encodes how fake engagement behaves — mass
+            following, bot likes without comments, young accounts, promotional bios —
+            but it is not a sample of real accounts. The 94.09% figure measures the
+            pipeline, not real-world performance on live profiles, and the application
+            itself states this to the user. A control run of the same pipeline on
+            randomly-labelled data scores 0.5110 against a 0.5045 baseline, which is
+            what confirms the headline number reflects signal rather than leakage.
+          </div>
+        </div>
+
+        <div class="qa-2col">
+          <div class="qa-block">
+            <h4>05 — My contribution</h4>
+            <p class="mono" style="font-size:.8rem;color:var(--muted)">Implementation verified in the repository:</p>
+            <ul class="tight">
+              <li>Preprocessing: missing-value imputation, duplicate removal, label validation</li>
+              <li>Feature engineering across profile, behavioural and textual attributes, shared between training and serving</li>
+              <li>XGBoost training with class-imbalance strategy selection, plus the evaluation module — confusion matrix, cross-validation, baseline comparison</li>
+              <li>An algorithm benchmark comparing candidate models on the features the API actually serves</li>
+              <li>FastAPI service with Pydantic request validation, a model-info endpoint that reports metrics and training-time warnings, and version checking on load</li>
+              <li>Browser model: Random Forest exported to JSON and evaluated in vanilla JavaScript with the same scaler statistics and TF-IDF vocabulary, plus per-feature contribution explanations</li>
+              <li>GitHub Actions workflow that validates and publishes the browser app</li>
+            </ul>
+            <p><span class="ph">[ADD YOUR SPECIFIC ROLE IF THIS WAS TEAM WORK]</span></p>
+          </div>
+
+          <div class="qa-block">
+            <h4>06 — Technology</h4>
+            <ul class="tags">
+              <li>Python</li><li>Pandas</li><li>NumPy</li><li>Scikit-learn</li>
+              <li>XGBoost</li><li>Random Forest</li><li>TF-IDF</li>
+              <li>FastAPI</li><li>Pydantic</li><li>REST API</li>
+              <li>JavaScript</li><li>GitHub Actions</li><li>pytest</li>
+            </ul>
+
+            <h4 style="margin-top:1.4rem">07 — Links</h4>
+            <div class="cta-row" style="margin-top:.4rem">
+              <a class="btn btn-primary" href="https://github.com/Suyambu567/FAKE_USER_DEC" rel="noopener">GitHub Repository</a>
+              <span class="btn" aria-disabled="true"><span class="ph">[ADD LIVE DEMO URL]</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============================ EXPERIENCE ============================ -->
+<section id="experience">
+  <div class="wrap">
+    <span class="eyebrow">Experience</span>
+    <h2>Professional experience</h2>
+    <div class="entry">
+      <h3><span class="ph">[ADD ROLE]</span> · <span class="ph">[ADD COMPANY]</span></h3>
+      <p class="meta"><span class="ph">[ADD DATES]</span></p>
+      <p><span class="ph">[ADD RESPONSIBILITIES — AI/ML, data, Python, backend, NLP, LLM]</span></p>
+    </div>
+    <div class="note">
+      <p>No employment history was verifiable from the project sources, so nothing is
+      stated here. Fill the placeholders above, or delete this section — see the README.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ EDUCATION ============================ -->
+<section id="education">
+  <div class="wrap">
+    <span class="eyebrow">Education</span>
+    <h2>Education</h2>
+    <div class="entry">
+      <h3>B.E. Computer Science and Engineering</h3>
+      <p class="meta">Mahendra Engineering College (Autonomous)</p>
+      <p><span class="ph">[ADD YEARS]</span> &nbsp; <span class="ph">[ADD CGPA IF YOU WANT IT SHOWN]</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ CERTIFICATIONS ============================ -->
+<section id="certifications">
+  <div class="wrap">
+    <span class="eyebrow">Certifications</span>
+    <h2>Certifications</h2>
+    <p><span class="ph">[ADD VERIFIED CERTIFICATIONS — name, issuer, year, credential URL]</span></p>
+    <div class="note">
+      <p>Left empty on purpose: no certification could be verified from the project
+      sources, and an unverified credential on a portfolio is worse than none.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ GITHUB ============================ -->
+<section id="github">
+  <div class="wrap">
+    <span class="eyebrow">Code</span>
+    <h2>Read the code</h2>
+    <p class="lede">
+      The fastest way to judge an engineer is to read what they wrote. Where a
+      repository is public, it is linked directly.
+    </p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="https://github.com/Suyambu567" rel="noopener">GitHub Profile</a>
+    </div>
+    <div class="table-scroll" style="margin-top:1.4rem">
+      <table>
+        <thead><tr><th>Project</th><th>Repository</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Citizen Complaint Voice Assistant</td>
+            <td>Private repository — source not public</td>
+          </tr>
+          <tr>
+            <td>Tamil BPE Tokenizer</td>
+            <td><span class="ph">[ADD TAMIL TOKENIZER GITHUB URL]</span></td>
+          </tr>
+          <tr>
+            <td>Fake User Detection</td>
+            <td><a href="https://github.com/Suyambu567/FAKE_USER_DEC" rel="noopener">github.com/Suyambu567/FAKE_USER_DEC</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ LINKEDIN ============================ -->
+<section id="linkedin">
+  <div class="wrap">
+    <span class="eyebrow">LinkedIn</span>
+    <h2>Connect with me on LinkedIn</h2>
+    <p class="lede">
+      Open to conversations about AI/ML engineering, NLP and Voice AI roles.
+    </p>
+    <div class="cta-row">
+      <span class="btn btn-primary" aria-disabled="true"><span class="ph">[ADD LINKEDIN URL]</span></span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ CONTACT ============================ -->
+<section id="contact">
+  <div class="wrap">
+    <span class="eyebrow">Contact</span>
+    <h2>Get in touch</h2>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <h3>Email</h3>
+        <p><span class="ph">[ADD EMAIL]</span></p>
+      </div>
+      <div class="contact-card">
+        <h3>LinkedIn</h3>
+        <p><span class="ph">[ADD LINKEDIN URL]</span></p>
+      </div>
+      <div class="contact-card">
+        <h3>GitHub</h3>
+        <p><a href="https://github.com/Suyambu567" rel="noopener">github.com/Suyambu567</a></p>
+      </div>
+      <div class="contact-card">
+        <h3>Resume</h3>
+        <p><span class="ph">[ADD RESUME URL]</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="name">Suyambu</p>
+    <p style="margin:0;color:var(--muted)">AI / ML Engineer | Data Analyst</p>
+    <p class="links">
+      <a href="https://github.com/Suyambu567" rel="noopener">GitHub</a>
+      <span class="ph">[ADD LINKEDIN URL]</span>
+      <span class="ph">[ADD EMAIL]</span>
+    </p>
+    <p class="copy">© 2026 Suyambu</p>
+  </div>
+</footer>
+
+</body>
+</html>

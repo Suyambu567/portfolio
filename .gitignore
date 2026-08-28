@@ -1,0 +1,5 @@
+# Nothing here is built or generated — this is a zero-dependency static site.
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/

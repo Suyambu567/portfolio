@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Case Study: Tamil/Tanglish Citizen Complaint Voice Assistant | Suyambu</title>
+<meta name="description" content="Technical case study of an end-to-end Tamil/Tanglish voice assistant — architecture, speech recognition fine-tuning, dialogue design, department routing and measured results.">
+<meta name="author" content="Suyambu">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="Case Study: Tamil/Tanglish Citizen Complaint Voice Assistant">
+<meta property="og:description" content="From spoken Tamil to a routed civic complaint — architecture, ASR fine-tuning and measured evaluation results.">
+<meta property="og:image" content="assets/favicon.svg">
+<meta name="twitter:card" content="summary">
+
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/styles.css">
+<script src="js/theme.js"></script>
+</head>
+
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">Suyambu <span>· AI/ML Engineer</span></a>
+    <nav class="nav" aria-label="Primary">
+      <a href="index.html#projects">Projects</a>
+      <a href="index.html#github" class="opt">GitHub</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <button class="theme-toggle" type="button" hidden aria-label="Switch colour theme">☽</button>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero">
+  <div class="wrap">
+    <a class="back-link" href="index.html#voice-assistant">← Back to projects</a>
+    <span class="eyebrow">Case study · 01</span>
+    <h1 style="font-size:clamp(1.8rem,4.5vw,2.6rem)">Tamil/Tanglish Citizen Complaint Voice Assistant</h1>
+    <p class="pitch">
+      An end-to-end Voice AI system: spoken Tamil or Tanglish in, a routed and
+      ticketed civic complaint out, and a spoken Tamil reply back — with no form
+      to fill in at any point.
+    </p>
+    <div class="note">
+      <p><strong>Scope of this page.</strong> This system was built in a private
+      repository. Nothing here contains source code, internal URLs, infrastructure
+      details, credentials or citizen data — only architecture, engineering
+      decisions and measured evaluation results.</p>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+
+<!-- 01 -->
+<section class="cs-step">
+  <span class="eyebrow"><b>01</b> — Problem</span>
+  <h2>The form is the barrier</h2>
+  <p>
+    Filing a civic complaint normally means completing a form: choosing the right
+    department, picking the right category, and writing an address the way the
+    system expects it. That asks the citizen to do the classification work before
+    anything happens — and the people most affected by a broken streetlight or a
+    water outage are often the least able to do it.
+  </p>
+  <p>
+    Speech removes the form, but only if the system can handle how people actually
+    speak. In Tamil Nadu that means code-mixed Tamil and English inside a single
+    sentence: <em>"enga area-la water problem irukku"</em>,
+    <em>"government scheme pathi"</em>. It also means spontaneous speech, which is
+    rarely complete — someone will describe the problem vividly and never mention
+    which street they are on.
+  </p>
+  <p>So the system has to do three things a form does for free: understand
+    code-mixed speech, work out what is missing, and ask for it.</p>
+</section>
+
+<!-- 02 -->
+<section class="cs-step">
+  <span class="eyebrow"><b>02</b> — Solution</span>
+  <h2>A spoken dialogue that ends in a filed complaint</h2>
+  <p>
+    A mobile client streams live microphone audio to a Python voice server over a
+    WebSocket. Voice activity detection decides when the speaker has actually
+    stopped rather than merely paused. The captured utterance is preprocessed and
+    transcribed, then classified into one of <strong>24 civic issue categories</strong>
+    while a location layer extracts the area, street, sub-area or ward.
+  </p>
+  <p>
+    If the complaint is missing something it needs, the assistant asks for that one
+    thing and waits, rather than filing an incomplete record. Once complete, the
+    complaint is mapped to one of <strong>25 departments</strong>, stored with a
+    sequential ticket number that survives server restarts, and read back to the
+    citizen in spoken Tamil.
+  </p>
+  <p>
+    It is not a chatbot with a voice attached. Every stage — turn-taking,
+    transcription, classification, slot filling, routing, ticketing, speech
+    synthesis — is part of one real-time loop, and each one can fail in a way that
+    produces a wrong <em>filed record</em> rather than an error message.
+  </p>
+</section>
+
+<!-- 03 -->
+<section class="cs-step">
+  <span class="eyebrow"><b>03</b> — Architecture</span>
+  <h2>How a spoken sentence becomes a routed ticket</h2>
+
+  <div class="diagram">
+    <svg viewBox="0 0 700 870" role="img" aria-labelledby="arch-title arch-desc">
+      <title id="arch-title">End-to-end voice assistant architecture</title>
+      <desc id="arch-desc">A thirteen-stage vertical pipeline. A citizen speaks into a
+        Flutter app, which streams audio over a WebSocket to a Python voice server.
+        Voice activity detection segments the speech, audio preprocessing prepares it,
+        and a fine-tuned Whisper model transcribes it. The text is classified into a
+        civic issue category, understood by an LLM, and mined for location details.
+        When a detail is missing the assistant asks a follow-up question and loops
+        back to the citizen. The completed complaint is routed to a department, filed
+        with a ticket number, and returned to the citizen as spoken Tamil.</desc>
+      <defs>
+        <marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7"
+                markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" class="d-arrow"/>
+        </marker>
+      </defs>
+
+      <!-- loop-back for follow-up questions -->
+      <path class="d-line" d="M150 618 H104 V42 H146" marker-end="url(#a2)"/>
+      <text class="d-group-label" transform="rotate(-90 96 330)" x="96" y="330"
+            text-anchor="middle">FOLLOW-UP LOOP</text>
+
+      <!-- 00 citizen -->
+      <rect class="d-box-a" x="150" y="20" width="260" height="44" rx="7"/>
+      <text class="d-label" x="280" y="47" text-anchor="middle">Citizen speaks a complaint</text>
+      <text class="d-sub" x="425" y="41">Tamil / Tanglish,</text>
+      <text class="d-sub" x="425" y="53">spontaneous speech</text>
+      <path class="d-line" d="M280 64 V80" marker-end="url(#a2)"/>
+
+      <!-- 01 flutter -->
+      <rect class="d-box" x="150" y="84" width="260" height="44" rx="7"/>
+      <text class="d-label" x="280" y="111" text-anchor="middle">Flutter mobile app</text>
+      <text class="d-sub" x="425" y="111">microphone capture</text>
+      <path class="d-line" d="M280 128 V144" marker-end="url(#a2)"/>
+
+      <!-- 02 websocket -->
+      <rect class="d-box" x="150" y="148" width="260" height="44" rx="7"/>
+      <text class="d-label" x="280" y="175" text-anchor="middle">WebSocket audio stream</text>
+      <text class="d-sub" x="425" y="175">continuous, bidirectional</text>
+      <path class="d-line" d="M280 192 V208" marker-end="url(#a2)"/>
+
+      <!-- 03 vad -->
+      <rect class="d-box" x="150" y="212" width="260" height="44" rx="7"/>
+      <text class="d-label" x="280" y="239" text-anchor="middle">Voice activity detection</text>
+      <text class="d-sub" x="425" y="233">WebRTC VAD, 20 ms frames</text>
+      <text class="d-sub" x="425" y="245">decides when the turn ends</text>
+      <path class="d-line" d="M280 256 V272" marker-end="url(#a2)"/>
+
+      <!-- 04 preprocess -->
+      <rect class="d-box" x="150" y="276" width="260" height="44" rx="7"/>
+      <text class="d-label" x="280" y="303" text-anchor="middle">Audio preprocessing</text>
+      <text class="d-sub" x="425" y="303">conditioning before transcription</text>
+      <path class="d-line" d="M280 320 V336" marker-end="url(#a2)"/>
+
+      <!-- 05 stt -->
+      <rect class="d-box-a" x="150" y="340" width="260" height="44" rx="7"/>
+      <text class="d-label" x="280" y="367" text-anchor="middle">Speech-to-text</text>
+      <text class="d-sub" x="425" y="361">Whisper-medium + LoRA,</text>
+      <text class="d-sub" x="425" y="373">served via CTranslate2</text>
+      <path class="d-line" d="M280 384 V400" marker-end="url(#a2)"/>
+
+      <!-- 06 intent -->
+      <rect class="d-box" x="150" y="404" width="260" height="44" rx="7"/>
+      <text class="d-label" x="280" y="431" text-anchor="middle">Intent &amp; category classification</text>
+      <text class="d-sub" x="425" y="425">24 civic issue types,</text>
+      <text class="d-sub" x="425" y="437">Tanglish keyword layer</text>
+      <path class="d-line" d="M280 448 V464" marker-end="url(#a2)"/>
+
+      <!-- 07 llm -->
+      <rect class="d-box" x="150" y="468" width="260" height="44" rx="7"/>
+      <text class="d-label" x="280" y="495" text-anchor="middle">LLM — complaint understanding</text>
+      <text class="d-sub" x="425" y="495">interprets the description</text>
+      <path class="d-line" d="M280 512 V528" marker-end="url(#a2)"/>
+
+      <!-- 08 location -->
+      <rect class="d-box" x="150" y="532" width="260" height="44" rx="7"/>
+      <text class="d-label" x="280" y="559" text-anchor="middle">Location extraction</text>
+      <text class="d-sub" x="425" y="553">area / street / sub-area / ward,</text>
+      <text class="d-sub" x="425" y="565">aliases + fuzzy matching</text>
+      <path class="d-line" d="M280 576 V592" marker-end="url(#a2)"/>
+
+      <!-- 09 followup -->
+      <rect class="d-box" x="150" y="596" width="260" height="44" rx="7"/>
+      <text class="d-label" x="280" y="623" text-anchor="middle">Missing detail? Ask and wait</text>
+      <text class="d-sub" x="425" y="623">slot filling, one question at a time</text>
+      <path class="d-line" d="M280 640 V656" marker-end="url(#a2)"/>
+
+      <!-- 10 routing -->
+      <rect class="d-box" x="150" y="660" width="260" height="44" rx="7"/>
+      <text class="d-label" x="280" y="687" text-anchor="middle">Department routing</text>
+      <text class="d-sub" x="425" y="687">25 departments</text>
+      <path class="d-line" d="M280 704 V720" marker-end="url(#a2)"/>
+
+      <!-- 11 file -->
+      <rect class="d-box" x="150" y="724" width="260" height="44" rx="7"/>
+      <text class="d-label" x="280" y="751" text-anchor="middle">Complaint filed + ticket issued</text>
+      <text class="d-sub" x="425" y="745">sequential number,</text>
+      <text class="d-sub" x="425" y="757">resumes across restarts</text>
+      <path class="d-line" d="M280 768 V784" marker-end="url(#a2)"/>
+
+      <!-- 12 tts -->
+      <rect class="d-box-a" x="150" y="788" width="260" height="44" rx="7"/>
+      <text class="d-label" x="280" y="815" text-anchor="middle">Tamil reply → text-to-speech</text>
+      <text class="d-sub" x="425" y="809">spoken back to the citizen</text>
+      <text class="d-sub" x="425" y="821">with the ticket number</text>
+    </svg>
+  </div>
+
+  <h3>The parts that are not obvious</h3>
+  <ul class="tight">
+    <li><strong>Turn-taking lives at the frame level.</strong> Voice activity detection
+      runs over 20&nbsp;ms frames, which is what makes the difference between an
+      assistant that interrupts and one that lets a person finish a sentence.</li>
+    <li><strong>Classification is a layer, not a prompt.</strong> Category detection
+      scores an utterance against each issue type using a keyword layer built for
+      Tanglish, before and alongside the LLM — so an ambiguous transcript degrades
+      into an unclassified complaint rather than a confidently wrong department.</li>
+    <li><strong>Location is its own problem.</strong> Distinguishing an area name from
+      a description of the problem is genuinely hard in spontaneous speech, and it is
+      handled by a dedicated extraction layer with aliases and fuzzy matching rather
+      than being left to the model.</li>
+    <li><strong>The follow-up loop is the reason it works.</strong> When a required
+      detail is absent, the assistant asks for that one thing and returns to listening.
+      Without it, most real complaints would be filed unroutable.</li>
+  </ul>
+</section>
+
+<!-- 04 -->
+<section class="cs-step">
+  <span class="eyebrow"><b>04</b> — My contribution</span>
+  <h2>What was implemented</h2>
+  <p class="mono" style="font-size:.8rem;color:var(--muted)">Verified against the project repository:</p>
+  <ul class="tight">
+    <li><strong>Real-time voice server</strong> — WebSocket audio ingestion, VAD-driven
+      turn-taking, audio preprocessing ahead of transcription, and session handling for
+      concurrent callers.</li>
+    <li><strong>Complaint dialogue</strong> — the dialogue state machine, intent and
+      category classification across 24 civic issue types, the Tanglish keyword layer,
+      confirmation and cancellation handling.</li>
+    <li><strong>Location understanding</strong> — area, street, sub-area and ward
+      extraction, alias normalisation, fuzzy matching, and the checks that separate a
+      place name from a problem description.</li>
+    <li><strong>Routing and records</strong> — the department mapping across 25
+      departments, sequential ticket numbering that resumes after a restart, and a
+      command-line tool to query filed complaints by ticket or by department.</li>
+    <li><strong>ASR fine-tuning</strong> — dataset preparation from human-verified
+      transcripts, LoRA training on a Tamil Whisper base, the evaluation harness, and
+      the promotion gate that a new model must pass on word error rate, character error
+      rate and latency before it replaces the live one.</li>
+    <li><strong>Speech output</strong> — Tamil response generation, text-to-speech
+      routing and response caching.</li>
+    <li><strong>Testing</strong> — a pytest suite covering turn-taking, transcription
+      confidence gating, TTS caching and the dialogue, plus an offline harness that
+      drives the whole conversation with text and asserts the resulting record.</li>
+  </ul>
+  <p><span class="ph">[ADD YOUR SPECIFIC ROLE — team size and which components you personally owned]</span></p>
+</section>
+
+<!-- 05 -->
+<section class="cs-step">
+  <span class="eyebrow"><b>05</b> — Technology</span>
+  <h2>Stack</h2>
+  <div class="skill-grid">
+    <div class="skill-card">
+      <h3>Client &amp; transport</h3>
+      <ul class="tags"><li>Flutter</li><li>WebSocket</li><li>Real-time audio streaming</li></ul>
+    </div>
+    <div class="skill-card">
+      <h3>Speech</h3>
+      <ul class="tags">
+        <li>WebRTC VAD</li><li>Whisper-medium</li><li>LoRA / PEFT</li>
+        <li>CTranslate2</li><li>Cloud ASR providers</li><li>Neural TTS</li>
+      </ul>
+    </div>
+    <div class="skill-card">
+      <h3>Understanding</h3>
+      <ul class="tags">
+        <li>LLM</li><li>Intent classification</li><li>Slot filling</li>
+        <li>Code-mixed NLP</li><li>Fuzzy matching</li>
+      </ul>
+    </div>
+    <div class="skill-card">
+      <h3>Server &amp; tooling</h3>
+      <ul class="tags"><li>Python</li><li>asyncio</li><li>pytest</li><li>CLI tooling</li></ul>
+    </div>
+  </div>
+</section>
+
+<!-- 06 -->
+<section class="cs-step">
+  <span class="eyebrow"><b>06</b> — Results</span>
+  <h2>Measured, not claimed</h2>
+  <p>
+    Every general-purpose ASR engine evaluated for this project failed the same way:
+    it transliterated the English half of a code-mixed sentence into Tamil script,
+    which corrupted every stage downstream. The measurement below counts how many
+    English words survived in Latin script:
+  </p>
+  <div class="table-scroll">
+    <table>
+      <caption>English-word survival on code-mixed evaluation clips</caption>
+      <thead><tr><th>Engine</th><th class="num">English words kept in Latin script</th></tr></thead>
+      <tbody>
+        <tr><td>Conformer RNNT (Indic)</td><td class="num">0 / 62</td></tr>
+        <tr><td>Qwen-based Tamil ASR</td><td class="num">0 / 62</td></tr>
+        <tr><td>Multilingual 3B ASR model</td><td class="num">9 / 58 &nbsp;(16%)</td></tr>
+        <tr><td>Tamil Whisper-medium (untrained base)</td><td class="num">0 / 289 &nbsp;(0%)</td></tr>
+        <tr><td>Fine-tuned on this project's own speech</td><td class="num win">38.5%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    Fine-tuning on the deployment's own code-mixed speech did what swapping in
+    different pretrained models did not. Two rounds, each measured against the
+    version it replaced:
+  </p>
+  <div class="table-scroll">
+    <table>
+      <caption>Fine-tuning rounds, held-out clips</caption>
+      <thead>
+        <tr><th>Comparison</th><th class="num">WER</th><th class="num">CER</th><th class="num">English survival</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Untrained base → round 1 <span class="mono">(89 clips)</span></td>
+          <td class="num">80.1% → <span class="win">55.0%</span></td>
+          <td class="num">77.2% → <span class="win">39.4%</span></td>
+          <td class="num">0% → <span class="win">37.4%</span></td>
+        </tr>
+        <tr>
+          <td>Round 1 → round 2 <span class="mono">(107 clips)</span></td>
+          <td class="num">49.8% → <span class="win">46.6%</span></td>
+          <td class="num">32.8% → <span class="win">30.8%</span></td>
+          <td class="num">37.9% → <span class="win">38.5%</span></td>
+        </tr>
+        <tr>
+          <td>Spontaneous citizen clips only <span class="mono">(9 clips)</span></td>
+          <td class="num">83.8% → <span class="win">69.3%</span> &nbsp;<span class="mono">(−17% rel.)</span></td>
+          <td class="num">—</td><td class="num">—</td>
+        </tr>
+        <tr>
+          <td>Read-aloud prompts only <span class="mono">(98 clips)</span></td>
+          <td class="num">46.7% → 44.5%</td><td class="num">—</td><td class="num">—</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p>
+    Training data: <strong>1,071 clips / 73.1 minutes</strong> of human-verified
+    transcripts, split 857 train / 107 validation / 107 test. The adapter is LoRA
+    <span class="mono">r=32, α=64, dropout 0.05</span> on the attention projections —
+    9.4M trainable parameters, <span class="mono">1.22%</span> of the base model.
+  </p>
+  <div class="table-scroll">
+    <table>
+      <caption>Runtime, same evaluation</caption>
+      <thead><tr><th class="num">Average</th><th class="num">p50</th><th class="num">p95</th><th class="num">Real-time factor</th><th class="num">VRAM</th></tr></thead>
+      <tbody>
+        <tr><td class="num">0.533 s</td><td class="num">0.474 s</td><td class="num">1.091 s</td><td class="num">0.139</td><td class="num">3,080 MB</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note">
+    <p><strong>What these numbers do and do not say.</strong> A 46.6% word error rate
+    is high in absolute terms. Code-mixed Tanglish is punishing to score, because a
+    word written in the other script counts as a whole error even when a human would
+    read it correctly. The meaningful comparison is between two systems on the same
+    clips under the same metric — not the absolute value, and not a comparison against
+    English WER figures.</p>
+    <p>Two weaknesses stayed unsolved across both rounds: district and area name recall
+    (<span class="mono">0 / 6</span>), and Tamil-only word accuracy, which barely moved
+    despite a training batch aimed directly at it.</p>
+  </div>
+</section>
+
+<!-- 07 -->
+<section class="cs-step">
+  <span class="eyebrow"><b>07</b> — Lessons</span>
+  <h2>What the project actually taught</h2>
+  <ul class="tight">
+    <li><strong>Domain data beat model shopping.</strong> A year's worth of swapping
+      pretrained models produced 0% English survival. Roughly an hour of the
+      deployment's own labelled speech produced 38.5%. The lesson is where to spend
+      effort, not which model is best.</li>
+    <li><strong>The headline average hid the real gain.</strong> Round 2 barely moved
+      the read-aloud clips (46.7% → 44.5%) but improved spontaneous citizen speech by
+      17% relative — and spontaneous speech is the only kind production receives.
+      Reporting only the aggregate would have understated the improvement and pointed
+      the next round of work in the wrong direction.</li>
+    <li><strong>Read-aloud training data plateaued.</strong> Going from 10 to 60 minutes
+      bought around 25 WER points; 60 to 73 minutes bought 3.2. More prompts were no
+      longer the answer — labelling genuine recordings was.</li>
+    <li><strong>Improvement is a trade-off, not a win.</strong> The second round shifted
+      the script prior toward Tamil, causing regressions where the reference keeps
+      English in Latin script. Overall English survival still rose, so it shipped — but
+      it was a trade to watch, not a free gain.</li>
+    <li><strong>Test what gets filed, not that the code ran.</strong> In a voice pipeline
+      the dangerous failures are silent: a problem fragment parsed as an area name, an
+      unroutable department. Import-level tests prove nothing. The offline harness drives
+      the whole dialogue with text and asserts the record that comes out.</li>
+    <li><strong>Promotion needs a gate.</strong> A new model replaces the live one only
+      after clearing thresholds on word error rate, character error rate and p95 latency
+      together — otherwise a quality gain quietly becomes a latency regression.</li>
+  </ul>
+</section>
+
+<!-- 08 -->
+<section class="cs-step">
+  <span class="eyebrow"><b>08</b> — Links</span>
+  <h2>Links</h2>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Resource</th><th>Link</th></tr></thead>
+      <tbody>
+        <tr><td>Source repository</td><td>Private repository — source is not public</td></tr>
+        <tr><td>Live demo</td><td><span class="ph">[ADD DEMO URL IF AVAILABLE]</span></td></tr>
+        <tr><td>Public write-up</td><td><span class="ph">[ADD PUBLIC WRITE-UP URL IF AVAILABLE]</span></td></tr>
+        <tr><td>Other projects</td><td><a href="index.html#projects">Back to portfolio</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="cta-row">
+    <a class="btn btn-primary" href="index.html#projects">← All projects</a>
+    <a class="btn" href="index.html#contact">Contact</a>
+  </div>
+</section>
+
+</div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="name">Suyambu</p>
+    <p style="margin:0;color:var(--muted)">AI / ML Engineer | Data Analyst</p>
+    <p class="links">
+      <a href="https://github.com/Suyambu567" rel="noopener">GitHub</a>
+      <span class="ph">[ADD LINKEDIN URL]</span>
+      <span class="ph">[ADD EMAIL]</span>
+    </p>
+    <p class="copy">© 2026 Suyambu</p>
+  </div>
+</footer>
+
+</body>
+</html>
