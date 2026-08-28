@@ -102,7 +102,7 @@ all with:
 grep -rn '\[ADD ' index.html case-study-voice-assistant.html
 ```
 
-Four values, five occurrences. Everything else on the page is either verified or
+Three values, three occurrences. Everything else on the page is either verified or
 absent.
 
 | Placeholder | Appears in | What to put there |
@@ -110,7 +110,6 @@ absent.
 | `[ADD EMAIL]` | `index.html` → Contact | Contact email address |
 | `[ADD LINKEDIN URL]` | `index.html` → Contact | Full LinkedIn profile URL |
 | `[ADD RESUME URL]` | `index.html` → Contact | Link to a hosted PDF résumé |
-| `[ADD TAMIL TOKENIZER GITHUB URL]` | `index.html` → project 02 links, and the GitHub table | Repository URL once the tokenizer is pushed |
 
 Placeholders render as a quiet monospace chip — subtle enough that the page reads as
 finished, distinct enough that one cannot be shipped unnoticed. **Do not deploy with
@@ -122,7 +121,7 @@ placeholders still visible**: fill them, or delete the element that contains the
    what the implementation contains, verified against the source. If any of these were
    team projects, edit those bullets to describe your part specifically — the page makes
    no claim about team size either way.
-2. **Fill the four placeholders above**, or remove what you do not want shown.
+2. **Fill the three placeholders above**, or remove what you do not want shown.
 3. **Confirm `https://github.com/Suyambu567`** is the profile you want linked. It was
    taken from this workspace's git remote, not guessed.
 4. **Check the speech-recognition figures are still current** before publishing them —
@@ -147,6 +146,7 @@ only with its issuer, year and credential URL.
 |---|---|
 | `https://github.com/Suyambu567` | Live — taken from this workspace's git remote. Confirm it is the profile you want shown. |
 | `https://github.com/Suyambu567/FAKE_USER_DEC` | Live and public |
+| `https://github.com/Suyambu567/Tamil-BPE-Tokenizer` | Live and public |
 
 ---
 
