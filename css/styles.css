@@ -342,14 +342,17 @@ tbody tr:last-child td { border-bottom: 0; }
 
 .contact-grid {
   display: grid; gap: 1rem; margin-top: 1.6rem;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
 }
 .contact-card {
   background: var(--surface); border: 1px solid var(--border);
   border-radius: var(--radius); padding: 1.1rem;
 }
 .contact-card h3 { font-size: .8rem; text-transform: uppercase; letter-spacing: .09em; color: var(--muted); margin-bottom: .4rem; }
-.contact-card p { margin: 0; word-break: break-word; }
+/* Cards are wide enough for a full email address or profile URL to sit on one line.
+   Below that width they wrap, and the `<wbr>` in the markup puts the break at a
+   slash rather than in the middle of a word. */
+.contact-card p { margin: 0; font-size: .95rem; overflow-wrap: break-word; }
 
 /* ---------- footer ---------- */
 
