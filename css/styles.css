@@ -342,7 +342,9 @@ tbody tr:last-child td { border-bottom: 0; }
 
 .contact-grid {
   display: grid; gap: 1rem; margin-top: 1.6rem;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  /* min() clamps the track floor to the container, so the 340px preference cannot
+     push the cards wider than a narrow phone. */
+  grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr));
 }
 .contact-card {
   background: var(--surface); border: 1px solid var(--border);
