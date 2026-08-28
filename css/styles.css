@@ -18,9 +18,6 @@
   --accent:      #0f766e;
   --accent-text: #0b5d56;
   --accent-soft: rgba(15, 118, 110, 0.09);
-  --note-bg:     #fff9e8;
-  --note-border: #e3cf99;
-  --note-text:   #6a4d00;
   --shadow:      0 1px 2px rgba(13, 20, 27, .05), 0 8px 24px rgba(13, 20, 27, .05);
 
   --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
@@ -43,9 +40,6 @@
     --accent:      #4fd1c5;
     --accent-text: #6fe3d8;
     --accent-soft: rgba(79, 209, 197, 0.10);
-    --note-bg:     #1f1b10;
-    --note-border: #4a3c17;
-    --note-text:   #e5cf94;
     --shadow:      0 1px 2px rgba(0, 0, 0, .4), 0 10px 28px rgba(0, 0, 0, .35);
   }
 }
@@ -62,9 +56,6 @@
   --accent:      #4fd1c5;
   --accent-text: #6fe3d8;
   --accent-soft: rgba(79, 209, 197, 0.10);
-  --note-bg:     #1f1b10;
-  --note-border: #4a3c17;
-  --note-text:   #e5cf94;
   --shadow:      0 1px 2px rgba(0, 0, 0, .4), 0 10px 28px rgba(0, 0, 0, .35);
 }
 
@@ -201,23 +192,29 @@ section:first-of-type { border-top: 0; }
 
 /* ---------- placeholders ---------- */
 
+/* An unfilled value. Quiet enough that the page reads as finished, distinct
+   enough that it cannot be shipped by accident. Long placeholder text must be
+   allowed to wrap, or it forces the whole page to scroll sideways on a phone. */
 .ph {
-  font-family: var(--mono); font-size: .82em;
-  background: var(--note-bg); color: var(--note-text);
-  border: 1px dashed var(--note-border);
-  border-radius: 4px; padding: .05em .4em;
-  /* Placeholder text is long by nature. It must wrap, or it forces the whole
-     page to scroll sideways on a phone. */
+  font-family: var(--mono); font-size: .8em; letter-spacing: -0.01em;
+  background: var(--surface-2); color: var(--muted);
+  border: 1px solid var(--border-soft);
+  border-radius: 4px; padding: .1em .45em;
   display: inline; overflow-wrap: anywhere; word-break: break-word;
 }
 
+/* An editorial callout — the caveat that makes a number honest. Deliberately
+   not styled as a warning: this is content, not an error. */
 .note {
-  background: var(--note-bg); border: 1px solid var(--note-border);
-  color: var(--note-text); border-radius: var(--radius);
-  padding: .85rem 1rem; font-size: .88rem; margin: 1rem 0;
+  background: var(--surface-2);
+  border: 1px solid var(--border-soft);
+  border-left: 3px solid var(--accent);
+  color: var(--text-2); border-radius: 0 var(--radius) var(--radius) 0;
+  padding: .9rem 1.1rem; font-size: .88rem; margin: 1rem 0;
 }
-.note strong { color: inherit; }
-.note p:last-child { margin-bottom: 0; color: inherit; }
+.note strong { color: var(--text); }
+.note p { color: inherit; }
+.note p:last-child { margin-bottom: 0; }
 
 /* ---------- skills ---------- */
 

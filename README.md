@@ -17,8 +17,8 @@ one small script. It renders correctly with JavaScript disabled.
 | About | Why these three projects form one line of work |
 | Technical skills | Restricted to technologies the three featured projects actually use |
 | Featured projects | `01` Citizen Complaint Voice Assistant (hero) · `02` Tamil BPE Tokenizer · `03` Fake User Detection |
-| Experience · Education · Certifications | Placeholders where nothing could be verified |
-| GitHub · LinkedIn · Contact · Footer | Direct routes to code and to a reply |
+| Education | The one credential that could be stated without guessing |
+| GitHub · Contact · Footer | Direct routes to the code and to a reply |
 
 The voice assistant additionally has a full case study at
 `case-study-voice-assistant.html`, structured `01 Problem` → `08 Links`.
@@ -102,23 +102,44 @@ all with:
 grep -rn '\[ADD ' index.html case-study-voice-assistant.html
 ```
 
+Four values, five occurrences. Everything else on the page is either verified or
+absent.
+
 | Placeholder | Appears in | What to put there |
 |---|---|---|
-| `[ADD EMAIL]` | `index.html` (contact, footer) | Contact email address |
-| `[ADD LINKEDIN URL]` | `index.html` (hero button, LinkedIn section, contact, footer), case study footer | Full LinkedIn profile URL |
-| `[ADD RESUME URL]` | `index.html` (contact) | Link to a hosted PDF résumé |
-| `[ADD TAMIL TOKENIZER GITHUB URL]` | `index.html` (project 02, GitHub table) | Repository URL once the tokenizer is pushed |
-| `[ADD PUBLIC DEMO OR WRITE-UP URL]` | `index.html` (project 01) | Anything public that evidences the voice assistant |
-| `[ADD LIVE DEMO URL]` | `index.html` (project 03) | Deployed URL of the browser classifier |
-| `[ADD DEMO URL IF AVAILABLE]`, `[ADD PUBLIC WRITE-UP URL IF AVAILABLE]` | case study (08) | Same, on the case study page |
-| `[ADD YOUR SPECIFIC ROLE ...]` | all three projects, case study (04) | Team size and the components personally owned |
-| `[ADD ROLE]`, `[ADD COMPANY]`, `[ADD DATES]`, `[ADD RESPONSIBILITIES ...]` | `index.html` (experience) | Employment history — or delete the section |
-| `[ADD YEARS]`, `[ADD CGPA IF YOU WANT IT SHOWN]` | `index.html` (education) | Degree dates and grade |
-| `[ADD VERIFIED CERTIFICATIONS ...]` | `index.html` (certifications) | Name, issuer, year, credential URL |
+| `[ADD EMAIL]` | `index.html` → Contact | Contact email address |
+| `[ADD LINKEDIN URL]` | `index.html` → Contact | Full LinkedIn profile URL |
+| `[ADD RESUME URL]` | `index.html` → Contact | Link to a hosted PDF résumé |
+| `[ADD TAMIL TOKENIZER GITHUB URL]` | `index.html` → project 02 links, and the GitHub table | Repository URL once the tokenizer is pushed |
 
-Placeholders render in a dashed amber chip, so an unfilled one is impossible to miss
-on the page. **Do not deploy with placeholders still visible** — fill them, or delete
-the element that contains them.
+Placeholders render as a quiet monospace chip — subtle enough that the page reads as
+finished, distinct enough that one cannot be shipped unnoticed. **Do not deploy with
+placeholders still visible**: fill them, or delete the element that contains them.
+
+## Before you publish
+
+1. **Confirm the contribution framing.** Each project's *My contribution* section lists
+   what the implementation contains, verified against the source. If any of these were
+   team projects, edit those bullets to describe your part specifically — the page makes
+   no claim about team size either way.
+2. **Fill the four placeholders above**, or remove what you do not want shown.
+3. **Confirm `https://github.com/Suyambu567`** is the profile you want linked. It was
+   taken from this workspace's git remote, not guessed.
+4. **Check the speech-recognition figures are still current** before publishing them —
+   they describe two specific fine-tuning rounds and carry no date on the page.
+5. **Give the portfolio its own repository** — see the Pages note above.
+
+### Sections deliberately absent
+
+Experience, Certifications and a standalone LinkedIn section were removed rather than
+shipped as empty placeholder blocks. Nothing about employment history or credentials
+could be verified from the project sources, and an unverified credential on a portfolio
+is worse than none. If you want them back, they are three `<section>` blocks following
+the same pattern as Education.
+
+Certification candidates mentioned but never verified: JPMorgan Chase Quantitative
+Research virtual experience, Infosys Springboard, Coursera, Great Learning. Add each
+only with its issuer, year and credential URL.
 
 ### Verified links already in place
 
@@ -126,12 +147,6 @@ the element that contains them.
 |---|---|
 | `https://github.com/Suyambu567` | Live — taken from this workspace's git remote. Confirm it is the profile you want shown. |
 | `https://github.com/Suyambu567/FAKE_USER_DEC` | Live and public |
-
-### Certifications — candidates awaiting verification
-
-Not placed on the page because none could be verified: JPMorgan Chase Quantitative
-Research virtual experience, Infosys Springboard, Coursera, Great Learning. Add each
-only with its issuer, year and credential URL.
 
 ---
 
@@ -163,6 +178,7 @@ Keep it that way when editing.
 - Skip link, semantic landmarks, one `<h1>` per page, headings in order
 - Every diagram carries `<title>` and `<desc>` and is exposed as `role="img"`
 - Visible focus rings; the theme toggle is a real `<button>` with an `aria-label`
+- No dead controls: a link is only rendered as a button when it has somewhere to go
 - Colour pairs meet WCAG AA contrast in both themes
 - Wide tables and diagrams scroll inside their own container — the page body never
   scrolls horizontally
