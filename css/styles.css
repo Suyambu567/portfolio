@@ -509,6 +509,71 @@ tbody tr:last-child td { border-bottom: 0; }
 }
 .io .arrow { color: var(--accent); padding: 0 .35rem; }
 
+/* ---------- project cover images ----------
+   The image tells the story; the SVG diagram below it carries the evidence.
+   Both are dark by design, so in light mode the frame reads as a deliberate
+   panel rather than an accident: a heavier border and a soft outer glow set
+   it apart from the page instead of letting it float. */
+
+.project-shot {
+  position: relative;
+  margin: 1.5rem 0 0;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  /* Sampled from each artwork's own corners, so a portrait image centred on a
+     wide panel shows no visible letterbox — the panel and the picture share a
+     background. */
+  background: var(--shot-bg, #05080f);
+  border: 1px solid var(--border);
+  box-shadow: var(--elev-1);
+}
+/* The artwork is portrait. In the narrow two-up columns it simply fills the
+   width; in the wide hero card it would become absurdly tall, so there it is
+   height-capped and centred on the panel instead of stretched. */
+.project-hero .project-shot { display: grid; place-items: center; }
+.project-hero .project-shot img {
+  width: auto; max-width: 100%;
+  max-height: clamp(320px, 52vw, 560px);
+}
+.project-shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* width/height attributes are set in the markup, so the browser reserves the
+     right box before the file arrives and the page never jumps. */
+}
+/* A hairline of the accent along the top ties the panel to the site's palette. */
+.project-shot::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  border-radius: inherit;
+  box-shadow: inset 0 1px 0 rgba(45, 209, 197, .22);
+}
+.project-hero .project-shot { margin-top: 1.7rem; }
+
+/* In light mode the dark panel needs to look chosen, not stranded. */
+:root:not([data-theme="dark"]) .project-shot {
+  border-color: rgba(13, 20, 27, .14);
+  box-shadow: 0 2px 6px rgba(13, 20, 27, .08), 0 18px 44px rgba(13, 20, 27, .10);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .project-shot { box-shadow: var(--elev-1); }
+}
+:root[data-theme="dark"] .project-shot { box-shadow: var(--elev-1); }
+
+/* The image arrives with its card rather than through a second observer of its
+   own: one nested inside the other is redundant, and the two race. */
+@media (prefers-reduced-motion: no-preference) {
+  .js .reveal .project-shot img { opacity: 0; transform: scale(1.035); }
+  .js .reveal.is-in .project-shot img {
+    opacity: 1; transform: none;
+    transition: opacity .6s cubic-bezier(.2,.7,.2,1) .1s,
+                transform .7s cubic-bezier(.2,.7,.2,1) .1s;
+  }
+  .project-shot { transition: box-shadow .28s ease, border-color .28s ease; }
+  .project-shot:hover { border-color: var(--accent); }
+  .project-shot:hover img { transform: scale(1.022); transition: transform .5s cubic-bezier(.2,.7,.2,1); }
+}
+
 /* ---------- diagrams and project visuals ---------- */
 
 .diagram {
