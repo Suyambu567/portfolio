@@ -1,0 +1,63 @@
+S. Suyambulingaraj
+AI/ML Engineer
+
+Chennai, Tamil Nadu, India  |  suyambulingaraj7@gmail.com
+linkedin.com/in/suyambulingaraj-s-165590250  |  github.com/Suyambu567
+
+PROFESSIONAL SUMMARY
+AI/ML Engineer at XMEDIA Solutions, building AI-powered applications across machine learning, NLP and large language models. Fine-tuned Whisper ASR with LoRA for code-mixed Tamil-English speech and served it through a real-time WebSocket voice pipeline; implemented Byte Pair Encoding from scratch against Tamil Unicode; built an imbalance-aware XGBoost classifier reported against its majority-class baseline rather than accuracy alone. Works across model training, evaluation, and the FastAPI and WebSocket backends that serve them. B.E. Computer Science and Engineering, 2025.
+
+TECHNICAL SKILLS
+Languages: Python, JavaScript
+Machine Learning: Scikit-learn, XGBoost, Random Forest, LoRA / PEFT fine-tuning, class imbalance handling, cross-validation, model evaluation, baseline comparison
+Speech & Voice AI: Whisper, ASR / speech recognition, CTranslate2, text-to-speech, WebRTC voice activity detection, real-time audio streaming
+NLP & LLM Applications: BPE tokenization, Tamil NLP, Tamil Unicode processing, code-mixed (Tanglish) NLP, TF-IDF, feature engineering, LLM integration, prompt engineering, intent classification, slot filling, dialogue state management
+Backend & Data: FastAPI, REST APIs, WebSocket, Pydantic, asynchronous Python services, Pandas, NumPy, data preprocessing, feature extraction, evaluation metrics
+Tools: Git, GitHub, GitHub Actions, pytest, Flutter, YAML, JSON, Jupyter Notebook, Google Colab
+
+EXPERIENCE
+
+AI/ML Engineer - XMEDIA Solutions | May 2026 &ndash; Present
+Full-time - Chennai, Tamil Nadu, India &middot; On-site
+- Build AI-powered applications spanning artificial intelligence, machine learning, natural language processing, large language models and generative AI.
+- Work across RAG pipelines, LLM integration, prompt engineering, model fine-tuning, AI agents, and speech-to-text and text-to-speech, combining machine learning models, LLMs, retrieval systems and real-time voice technologies to solve real-world problems.
+
+Engineer Intern - MSL Infotech India Pvt. Ltd. | Dec 2025 &ndash; May 2026
+Internship - Chennai, Tamil Nadu, India &middot; On-site
+
+Data Analyst - Elevate Labs | Jan 2025 &ndash; Mar 2025
+Internship - Remote
+- Performed data collection, cleaning and preprocessing on real-world datasets, and conducted exploratory data analysis (EDA) to identify trends and patterns.
+- Queried, transformed and analysed data with Python (Pandas) and SQL, and built Excel dashboards and visual reports presenting insights that supported data-driven business decisions.
+
+SELECTED PROJECTS
+
+01 | Citizen Complaint Voice Assistant - End-to-End Voice AI / LLM Application
+Python, Whisper, LoRA / PEFT, CTranslate2, WebRTC VAD, WebSocket, LLM, text-to-speech, Flutter, pytest - private repository; no source or infrastructure disclosed
+- Built an end-to-end spoken-dialogue system carrying a citizen's civic complaint from speech to a routed, ticketed record without a form, in code-mixed Tamil-English (Tanglish); every off-the-shelf ASR tested transliterated the English words into Tamil script and corrupted downstream routing.
+- Implemented the real-time voice server: WebSocket audio streaming, WebRTC voice activity detection for turn-taking on 20 ms frames, Whisper-medium fine-tuned with LoRA and served through CTranslate2, an LLM plus rule-based intent and location layer over 24 civic issue categories, follow-up questioning for a missing area or street, routing across 25 departments, neural text-to-speech for the spoken Tamil reply, and a pytest harness asserting the filed record rather than that the code ran.
+- Cut word error rate from 80.1% to 55.0% and character error rate from 77.2% to 39.4% on 89 held-out clips in the first LoRA fine-tuning round; a second round reached 46.6% WER and 30.8% CER on 107 clips, and raised English words correctly kept in Latin script from 0% to 38.5%, at 0.533 s average serving latency (1.091 s p95, real-time factor 0.139).
+
+02 | Tamil BPE Tokenizer - Tamil NLP
+Python, Byte Pair Encoding, Tamil Unicode, YAML, JSON - github.com/Suyambu567/Tamil-BPE-Tokenizer
+- Tamil is agglutinative and composes each written character from a consonant plus a dependent vowel sign, so a naive tokenizer splits inside grapheme clusters and yields pieces that are not linguistic units, while word-level tokenization explodes the vocabulary.
+- Implemented Byte Pair Encoding from first principles in plain Python with no tokenizer library: vocabulary construction, adjacent-pair frequency statistics, best-pair selection and iterative merge application, the encoder that replays learned merges over unseen text, the decoder, JSON merge-rule persistence with Unicode preserved, a Tamil Unicode validator over the U+0B80-U+0BFF block, token-to-ID vocabulary mapping, and YAML-driven config for reproducible runs.
+- Trained on a demonstration corpus for 50 merges: the earliest rules learned join a consonant to its pulli and then to a following consonant, recovering Tamil's own orthographic units from frequency alone with no grammar encoded; encoding unseen text exposes the single-token memorisation that overfitting a small corpus produces.
+
+03 | Fake User Detection - Machine Learning / NLP
+Python, Scikit-learn, XGBoost, Random Forest, TF-IDF, FastAPI, Pydantic, JavaScript - github.com/Suyambu567/FAKE_USER_DEC
+- Detecting fake social profiles from account metadata is a class-imbalanced binary classification problem in which accuracy alone is uninformative: a majority-class guesser already scores well above 50%, so every figure is reported against that baseline.
+- Engineered profile, behavioural and textual features and encoded them in a fitted ColumnTransformer combining StandardScaler, TF-IDF over the bio and one-hot encoding; applied class-imbalance handling only after the train/test split; trained XGBoost with imbalance-strategy selection, and added a test asserting the training and serving feature frames are identical column for column, since both call one shared feature-building function; served it through a FastAPI service with Pydantic validation and model-version checking, and exported a smaller Random Forest to JSON re-implemented in vanilla JavaScript to run in-browser with no backend.
+- Reached 0.9409 accuracy against a 0.6337 majority-class baseline, a lift of +0.3072, with F1 0.9179, ROC-AUC 0.9331 and 5-fold cross-validation 0.9400 +/- 0.0018 on 10,000 held-out profiles; the 256 KB in-browser model scored 0.9342 against a 0.6312 baseline. A control run on randomly shuffled labels scored 0.5110 against a 0.5045 baseline, confirming signal rather than leakage. Both models are evaluated on synthetic data, not a sample of real accounts.
+
+EDUCATION
+B.E. Computer Science and Engineering | 2025
+Mahendra Engineering College, Salem, Tamil Nadu
+
+CERTIFICATIONS & LANGUAGES
+Python Programming Certificate  |  SQL for Data Analytics Certificate  |  Power BI / Tableau Certification
+Languages: Tamil (Native)  |  English (Professional)
+
+LINKS
+linkedin.com/in/suyambulingaraj-s-165590250  |  github.com/Suyambu567
+github.com/Suyambu567/Tamil-BPE-Tokenizer  |  github.com/Suyambu567/FAKE_USER_DEC
