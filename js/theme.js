@@ -83,6 +83,35 @@
     }, { rootMargin: "0px 0px -8% 0px", threshold: 0.06 });
 
     Array.prototype.forEach.call(targets, function (el) { observer.observe(el); });
+
+    /* A safety sweep. An IntersectionObserver only reports the state it sees at
+       a callback; an element scrolled past between two callbacks — an anchor
+       jump, a flick scroll, a restored scroll position — can be missed and
+       would then stay invisible until it happened to re-enter the viewport.
+       This reveals anything already level with the fold, so nothing can be
+       permanently stuck. */
+    var ticking = false;
+    function sweep() {
+      ticking = false;
+      var fold = window.innerHeight * 0.94;
+      var rest = document.querySelectorAll(".reveal:not(.is-in)");
+      if (!rest.length) {
+        window.removeEventListener("scroll", onScroll);
+        window.removeEventListener("resize", onScroll);
+        return;
+      }
+      Array.prototype.forEach.call(rest, function (el) {
+        if (el.getBoundingClientRect().top < fold) { el.classList.add("is-in"); }
+      });
+    }
+    function onScroll() {
+      if (ticking) { return; }
+      ticking = true;
+      window.requestAnimationFrame(sweep);
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    onScroll();
   }
 
   /* ---------- stat counters ---------- */
