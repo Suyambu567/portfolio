@@ -114,6 +114,173 @@
     onScroll();
   }
 
+  /* ---------- header state ---------- */
+
+  /* The floating pill deepens its shadow once the page has scrolled. */
+  function initHeader() {
+    var header = document.querySelector(".site-header");
+    if (!header) { return; }
+    var ticking = false;
+    function set() {
+      ticking = false;
+      header.classList.toggle("is-scrolled", window.scrollY > 8);
+    }
+    window.addEventListener("scroll", function () {
+      if (ticking) { return; }
+      ticking = true;
+      window.requestAnimationFrame(set);
+    }, { passive: true });
+    set();
+  }
+
+  /* ---------- scrollspy ---------- */
+
+  /* Lights the nav link for the section currently on screen. Driven by an
+     observer band around the viewport's upper third, so the active link
+     changes when a chapter heading crosses the reading line. */
+  function initSpy() {
+    if (!canObserve) { return; }
+    var links = document.querySelectorAll('.nav a[href^="#"]');
+    if (!links.length) { return; }
+    var byId = {};
+    Array.prototype.forEach.call(links, function (a) {
+      var id = a.getAttribute("href").slice(1);
+      var el = document.getElementById(id);
+      if (el) { byId[id] = a; }
+    });
+    var ids = Object.keys(byId);
+    if (!ids.length) { return; }
+
+    function activate(id) {
+      Array.prototype.forEach.call(links, function (a) {
+        a.classList.toggle("is-active", a === byId[id]);
+      });
+    }
+
+    /* Every section with an id is watched — including ones with no nav link,
+       which clear the highlight, so scrolling from Contact back up to About
+       cannot leave Contact lit. */
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { activate(entry.target.id); }
+      });
+    }, { rootMargin: "-25% 0px -65% 0px", threshold: 0 });
+
+    Array.prototype.forEach.call(
+      document.querySelectorAll("main section[id]"),
+      function (el) { observer.observe(el); }
+    );
+  }
+
+  /* ---------- parallax ---------- */
+
+  /* Subtle vertical drift on the project artwork as it crosses the viewport.
+     Depth only — it never moves content enough to change what is readable,
+     runs on wide viewports with motion allowed, and leaves the DOM untouched
+     otherwise. */
+  function initParallax() {
+    if (reduced() || !window.matchMedia("(min-width: 900px)").matches) { return; }
+    var shots = document.querySelectorAll("[data-parallax] img");
+    if (!shots.length) { return; }
+    var ticking = false;
+    function update() {
+      ticking = false;
+      var vh = window.innerHeight;
+      Array.prototype.forEach.call(shots, function (img) {
+        var r = img.parentElement.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > vh) { return; }
+        var progress = (r.top + r.height / 2 - vh / 2) / vh; /* -0.5 .. 0.5 */
+        img.style.translate = "0 " + (progress * -14).toFixed(1) + "px";
+      });
+    }
+    function onScroll() {
+      if (ticking) { return; }
+      ticking = true;
+      window.requestAnimationFrame(update);
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    update();
+  }
+
+  /* ---------- certificate viewer ---------- */
+
+  /* A native <dialog>: showModal() provides focus containment, ESC handling
+     and focus restoration; this adds backdrop-click close, a body scroll
+     lock, and swapping in the right embed for the file type. Certificates
+     are local files under assets/certificates/ — no external viewer. */
+  function initCertViewer() {
+    var dialog = document.getElementById("cert-dialog");
+    if (!dialog || typeof dialog.showModal !== "function") { return; }
+    var title = dialog.querySelector(".cert-dialog-title");
+    var body = dialog.querySelector(".cert-dialog-body");
+    var tab = dialog.querySelector(".cert-dialog-tab");
+    var closeBtn = dialog.querySelector(".cert-dialog-close");
+    var opener = null;
+
+    function openCert(button) {
+      var src = button.getAttribute("data-cert");
+      if (!src) { return; }
+      var card = button.closest(".cert-card");
+      var name = card && card.querySelector(".n");
+      title.textContent = name ? name.textContent : "Certificate";
+      tab.href = src;
+      /* The embed is created on open and destroyed on close, so a PDF is not
+         fetched until someone asks for it and stops loading when dismissed. */
+      var el;
+      if (/\.(png|jpe?g|webp|gif|svg)(\?|#|$)/i.test(src)) {
+        el = document.createElement("img");
+        el.alt = title.textContent + " — certificate";
+        el.src = src;
+      } else {
+        /* <object> renders the PDF where the browser can, and shows its
+           child content where it cannot (typical on phones) — a local
+           fallback, no external viewer. */
+        el = document.createElement("object");
+        el.type = "application/pdf";
+        el.data = src;
+        el.setAttribute("aria-label", title.textContent + " — certificate");
+        var fb = document.createElement("div");
+        fb.className = "cert-dialog-fallback";
+        var msg = document.createElement("p");
+        msg.textContent = "This browser cannot display the PDF inline.";
+        var link = document.createElement("a");
+        link.className = "btn btn-primary";
+        link.href = src;
+        link.target = "_blank";
+        link.rel = "noopener";
+        link.textContent = "Open the certificate";
+        fb.appendChild(msg);
+        fb.appendChild(link);
+        el.appendChild(fb);
+      }
+      body.textContent = "";
+      body.appendChild(el);
+      opener = button;
+      document.body.classList.add("cert-dialog-open");
+      dialog.showModal();
+    }
+
+    dialog.addEventListener("close", function () {
+      document.body.classList.remove("cert-dialog-open");
+      body.textContent = "";
+      /* Modern browsers restore focus themselves; doing it explicitly keeps
+         the behaviour identical everywhere. */
+      if (opener) { opener.focus(); opener = null; }
+    });
+    closeBtn.addEventListener("click", function () { dialog.close(); });
+    /* A click on the dialog element itself is a click on the backdrop — the
+       bar and body cover the entire content box. */
+    dialog.addEventListener("click", function (event) {
+      if (event.target === dialog) { dialog.close(); }
+    });
+
+    document.addEventListener("click", function (event) {
+      var button = event.target.closest && event.target.closest(".cert-view");
+      if (button) { openCert(button); }
+    });
+  }
+
   /* ---------- stat counters ---------- */
 
   /* The final value lives in the markup as text. The counter overwrites it for
@@ -160,7 +327,11 @@
 
   document.addEventListener("DOMContentLoaded", function () {
     initTheme();
+    initHeader();
+    initSpy();
     initReveal();
     initCounters();
+    initParallax();
+    initCertViewer();
   });
 })();
