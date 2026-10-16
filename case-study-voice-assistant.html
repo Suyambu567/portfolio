@@ -15,27 +15,55 @@
 <meta name="twitter:card" content="summary">
 
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="css/styles.css">
-<script src="js/theme.js"></script>
+<meta name="theme-color" content="#04060d">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="css/hud.css">
+<script src="js/hud.js" defer></script>
 </head>
 
-<body class="cs-page">
+<body class="cs-page" id="top">
 <a class="skip" href="#main">Skip to content</a>
 
-<header class="site-header">
+<div class="atmo" aria-hidden="true">
+  <div class="dust"><i style="left:47%;top:17%"></i><i style="left:56%;top:44%"></i><i style="left:15%;top:76%"></i><i style="left:18%;top:34%"></i><i style="left:80%;top:15%"></i><i style="left:70%;top:65%"></i><i style="left:10%;top:9%"></i><i style="left:61%;top:81%"></i><i style="left:34%;top:58%"></i><i style="left:88%;top:44%"></i><i style="left:35%;top:8%"></i><i style="left:5%;top:60%"></i><i style="left:92%;top:88%"></i><i style="left:26%;top:92%"></i><i style="left:74%;top:30%"></i></div>
+</div>
+
+<div class="progress" aria-hidden="true"></div>
+
+<header class="nav" id="nav">
   <div class="wrap">
-    <a class="brand" href="index.html">S. Suyambulingaraj <span>· AI/ML Engineer</span></a>
-    <nav class="nav" aria-label="Primary">
+    <a class="brand" href="index.html" aria-label="S. Suyambulingaraj — portfolio home">
+      <span class="brand-dot" aria-hidden="true"></span>
+      <span>SUYAMBU<span class="ai">.AI</span></span>
+      <span class="brand-badge" aria-hidden="true">ML</span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="index.html#about">About</a>
+      <a href="index.html#experience">Experience</a>
       <a href="index.html#projects">Projects</a>
-      <a href="index.html#github" class="opt">GitHub</a>
+      <a href="index.html#skills">Expertise</a>
+      <a href="index.html#github">GitHub</a>
       <a href="index.html#contact">Contact</a>
     </nav>
-    <button class="theme-toggle" type="button" hidden aria-label="Switch colour theme">☽</button>
+    <div class="nav-tools">
+      <a class="hire" href="index.html#contact"><span aria-hidden="true">⚡</span> HIRE ME</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu"><span></span></button>
+    </div>
   </div>
 </header>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Mobile" hidden>
+  <a href="index.html#about">About</a>
+  <a href="index.html#experience">Experience</a>
+  <a href="index.html#projects">Projects</a>
+  <a href="index.html#skills">Expertise</a>
+  <a href="index.html#github">GitHub</a>
+  <a href="index.html#contact">Contact</a>
+</nav>
 
 <main id="main">
-<section class="hero">
+<section class="cs-hero">
   <div class="wrap">
     <a class="back-link" href="index.html#voice-assistant">← Back to projects</a>
     <span class="eyebrow">Case study · 01</span>
@@ -438,18 +466,46 @@
 </div>
 </main>
 
-<footer class="site-footer">
+<footer class="footer">
   <div class="wrap">
-    <p class="name">S. Suyambulingaraj</p>
-    <p style="margin:0;color:var(--muted)">AI/ML Engineer</p>
-    <p class="links">
-      <a href="https://github.com/Suyambu567" rel="noopener">GitHub</a>
-      <a href="https://www.linkedin.com/in/suyambulingaraj-s-165590250/" rel="noopener">LinkedIn</a>
-      <a href="index.html#contact">Contact</a>
-    </p>
-    <p class="copy">© 2026 S. Suyambulingaraj</p>
+    <div class="f-grid">
+      <div class="f-col">
+        <span class="f-brand"><span class="brand-dot" aria-hidden="true"></span>S. <span class="grad">SUYAMBULINGARAJ</span></span>
+        <p>AI/ML Engineer — speech, Tamil NLP and machine learning. Based in Chennai, Tamil Nadu, India.</p>
+        <div class="f-social">
+          <a class="icon-btn" href="https://github.com/Suyambu567" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5a9.5 9.5 0 0 0-3 18.5c.5.1.7-.2.7-.5v-1.8c-2.6.6-3.2-1.1-3.2-1.1-.4-1.1-1-1.4-1-1.4-.9-.6.1-.6.1-.6.9.1 1.4 1 1.4 1 .8 1.4 2.2 1 2.8.8.1-.6.3-1 .6-1.3-2.1-.2-4.3-1-4.3-4.7 0-1 .4-1.9 1-2.6-.1-.2-.4-1.2.1-2.5 0 0 .8-.3 2.6 1a9 9 0 0 1 4.8 0c1.8-1.3 2.6-1 2.6-1 .5 1.3.2 2.3.1 2.5.6.7 1 1.5 1 2.6 0 3.7-2.2 4.5-4.3 4.7.3.3.6.9.6 1.8v2.6c0 .3.2.6.7.5A9.5 9.5 0 0 0 12 2.5z"/></svg></a>
+          <a class="icon-btn" href="https://www.linkedin.com/in/suyambulingaraj-s-165590250/" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 10.5V17M8 7.2v.1M12 17v-4a2.4 2.4 0 0 1 4.8 0v4" stroke-linecap="round"/></svg></a>
+          <a class="icon-btn" href="mailto:suyambulingaraj7@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 7l8.5 6 8.5-6"/></svg></a>
+          <a class="icon-btn" href="Suyambulingaraj_Resume_ATS.pdf" aria-label="Résumé PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M13 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9z"/><path d="M13 3v6h6M9 13h6M9 17h4" stroke-linecap="round"/></svg></a>
+        </div>
+      </div>
+      <div class="f-col">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#experience">Experience</a></li>
+          <li><a href="index.html#projects">Projects</a></li>
+          <li><a href="index.html#skills">Expertise</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Reach out</h4>
+        <ul>
+          <li><a href="mailto:suyambulingaraj7@gmail.com">suyambulingaraj7@gmail.com</a></li>
+          <li><a href="https://github.com/Suyambu567" rel="noopener">github.com/Suyambu567</a></li>
+          <li><a href="index.html">Back to portfolio</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="f-bottom">
+      <span>© 2026 S. Suyambulingaraj · Hand-built HTML, CSS &amp; JavaScript</span>
+      <a class="top-btn" href="#top">&uarr; Top</a>
+    </div>
   </div>
 </footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 </body>
 </html>

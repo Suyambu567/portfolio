@@ -3,3 +3,7 @@
 Thumbs.db
 *.swp
 .vscode/
+
+# Local AI-assistant context (never committed)
+/context/
+/CLAUDE.md
