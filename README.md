@@ -4,8 +4,11 @@ A personal engineering portfolio: a hiring-oriented single page plus one long-fo
 technical case study.
 
 Built as a **zero-dependency static site** — no framework, no build step, no package
-manager, and no external network requests at runtime. Two HTML files, one stylesheet,
-one small script. It renders correctly with JavaScript disabled.
+manager. Two HTML files, one stylesheet (`css/hud.css`), one script (`js/hud.js`). The
+only third-party request is Google Fonts. It renders correctly with JavaScript disabled.
+
+**Look:** a dark JARVIS/HUD "AI command console" theme in a cyan + violet palette, with
+original SVG robot mascots. Dark only — there is no light theme.
 
 **Positioning is AI/ML Engineer, and only that.** The résumé in this repository is
 written for Data Analyst roles; the site is not. Where the two disagree the site keeps
@@ -18,15 +21,15 @@ actually evidence. The phrase "Data Analyst" does not appear anywhere on the sit
 
 | Section | Content |
 |---|---|
-| Hero | Name, title, positioning, four calls to action (Projects · GitHub · LinkedIn · Résumé), and a stat row |
-| Stat row | `3` projects · `24` issue categories · `25` departments · `+0.31` accuracy lift — every figure measured in the project it belongs to |
-| About | Why these three projects form one line of work, plus the progression Machine Learning → Tamil NLP → End-to-End Voice AI / LLM Application |
-| Technical skills | Seven groups, restricted to technologies the three featured projects actually use |
-| Featured projects | `01` Citizen Complaint Voice Assistant (full-width hero) · `02` Tamil BPE Tokenizer and `03` Fake User Detection (two-up), each with a custom project-specific SVG |
-| Experience | Visual timeline: XMEDIA Solutions (current, accent-bordered) · MSL Infotech · Elevate Labs |
-| Evaluation (full width) | Project 03's eight-column metrics table, lifted out of the two-up grid so it is not read through a scrollbar |
-| Education & certifications | Degree, and the three certifications named in the résumé |
-| GitHub · Contact · Footer | Direct routes to the code, to LinkedIn, and to a reply |
+| Hero | Status pill, name on one line, typewriter role line, pitch, tech chips, CTAs; side panel with photo matrix (or animated HUD avatar), four tiles, a live "current role" clock and the AI crew strip |
+| Recruiter snapshot | Four focus tiles plus Résumé · Copy Email · Request Interview · LinkedIn |
+| About | Dossier, stat boxes (`3` projects · `24` categories · `25` departments · `+0.31` lift — each measured in its project), ID card with a talk-bot, progress ladder ML → Tamil NLP → Voice AI, strengths, languages, and the six-bot "AI crew" |
+| Experience | Live industry clock (Elevate Labs Jan–Mar 2025 + Dec 2025 → now; the gap is not counted) and a timeline: XMEDIA Solutions (current) · MSL Infotech · Elevate Labs |
+| Projects | Filter tabs, three project cards, then "Mission files" — collapsible deep dives holding every diagram, results table and caveat note. `01` opens by default |
+| Skills | Seven subsystem panels. The bars show how many items each group holds — a count, never a self-rating |
+| Credentials | Education, the three résumé-named certifications ("file pending"), and the GitHub repository list |
+| Contact | Email / LinkedIn / location tiles, an "Open to" panel, and a form that composes an email in the visitor's mail app — nothing is sent from the page |
+| Extras | Scroll progress bar, scroll rail with a riding bot, scrollspy nav, mobile menu, Ctrl/⌘ + K command palette, certificate viewer |
 
 The voice assistant additionally has a full case study at
 `case-study-voice-assistant.html`, structured `01 Problem` → `08 Links`.
@@ -42,12 +45,16 @@ rounded up, or invented. Where information was not verifiable it appears as a
 
 ## Tech stack
 
-- **HTML5** — semantic sectioning, one `<h1>` per page, descriptive headings
-- **CSS** — custom properties for theming, `grid` and `flexbox`, no preprocessor
-- **JavaScript** — one file, ~50 lines, for the light/dark toggle only
-- **SVG** — architecture diagrams inline in the HTML, theme-aware via CSS variables
+- **HTML5** — semantic sectioning, one `<h1>` per page, native `<details>` and `<dialog>`
+- **CSS** — one file, custom properties for the palette, `grid` and `flexbox`, no preprocessor
+- **JavaScript** — one file, all progressive enhancement and null-guarded so it runs on
+  both pages: scroll/progress/rail/scrollspy, mobile menu, typewriter, photo autoload,
+  live clocks, reveal + counters, bots, copy email, project filters, contact form → mailto,
+  command palette, certificate viewer
+- **SVG** — architecture diagrams and the robot sprite are inline in the HTML
+- **Fonts** — Inter, JetBrains Mono, Noto Sans Tamil and Space Grotesk from Google Fonts
 
-No fonts, scripts, styles, analytics or images are loaded from third parties.
+No analytics, trackers or third-party scripts.
 
 ---
 
@@ -56,17 +63,22 @@ No fonts, scripts, styles, analytics or images are loaded from third parties.
 ```
 Portfolio/
 ├── index.html                        # the portfolio itself
-├── Suyambulingaraj_Resume_ATS.pdf     # résumé, linked from the hero and Contact
 ├── case-study-voice-assistant.html   # long-form case study, 01 → 08
+├── Suyambulingaraj_Resume_ATS.pdf     # résumé, linked from the hero and Contact
 ├── css/
-│   └── styles.css                    # design tokens, layout, light + dark
+│   ├── hud.css                       # HUD theme for both pages
+│   └── styles.css                    # previous light/dark theme — no longer used
 ├── js/
-│   └── theme.js                      # theme toggle, scroll reveal, stat counters
-│                                      # (all progressive enhancement)
+│   ├── hud.js                        # all behaviour (progressive enhancement)
+│   └── theme.js                      # previous theme script — no longer used
 ├── tools/
 │   └── build_resume.py               # regenerates the résumé PDF + TXT
 ├── assets/
-│   └── favicon.svg
+│   ├── favicon.svg
+│   ├── projects/                     # project cover images (.webp)
+│   ├── profile/                      # owner photos — see below
+│   ├── certificates/                 # certificate files, when supplied
+│   └── backgrounds/                  # previous theme's backgrounds — no longer used
 ├── .nojekyll                         # stop GitHub Pages running Jekyll
 └── README.md
 ```
@@ -74,6 +86,13 @@ Portfolio/
 Content lives directly in the HTML rather than in a JavaScript data file. That keeps
 the page readable with JavaScript disabled, keeps it crawlable for search engines and
 link previews, and — for a two-page site — is less machinery to maintain, not more.
+
+### Profile photos
+
+Drop up to three photos into `assets/profile/` named `photo-1`, `photo-2`, `photo-3`
+(`.webp`, `.jpg`, `.jpeg` or `.png`). `photo-1` is the main one. The page finds them on
+its own — no code change. Until a photo exists the hero shows an animated HUD avatar,
+and the browser console shows harmless 404s from the lookup.
 
 ---
 
@@ -140,10 +159,8 @@ grep -rn '\[ADD ' index.html case-study-voice-assistant.html
 **No placeholders remain.** Email, LinkedIn and the résumé were all supplied and are
 live links — see *Verified links* below. The command above should print nothing.
 
-If a placeholder is ever reintroduced it renders as a quiet monospace chip (`.ph` in
-`css/styles.css`) — subtle enough that the page reads as finished, distinct enough that
-one cannot be shipped unnoticed. **Do not deploy with placeholders visible**: fill them,
-or delete the element that contains them.
+**Do not deploy with placeholders visible**: fill them, or delete the element that
+contains them.
 
 ## Before you publish
 
@@ -265,13 +282,13 @@ Project copy, metrics and diagrams are written inline in the two HTML files:
 
 | Project | Location |
 |---|---|
-| `01` Citizen Complaint Voice Assistant | `index.html` → `<article id="voice-assistant">`, plus all of `case-study-voice-assistant.html` |
-| `02` Tamil BPE Tokenizer | `index.html` → `<article id="tamil-tokenizer">` |
-| `03` Fake User Detection | `index.html` → `<article id="fake-user-detection">` |
+| `01` Citizen Complaint Voice Assistant | `index.html` → first `<article class="pcard">` and `<details id="voice-assistant">`, plus all of `case-study-voice-assistant.html` |
+| `02` Tamil BPE Tokenizer | `index.html` → second `<article class="pcard">` and `<details id="tamil-tokenizer">` |
+| `03` Fake User Detection | `index.html` → third `<article class="pcard">` and `<details id="fake-user-detection">` |
 
-Diagrams are inline `<svg>` inside those articles. They take their colours from the
-CSS custom properties in `css/styles.css` (`.d-box`, `.d-line`, `.d-label`, `.d-sub`),
-so they follow the light/dark theme without duplicated markup.
+Diagrams are inline `<svg>` inside those `<details>` blocks. They keep their original
+class names (`.d-box`, `.d-line`, `.d-label`, `.d-sub`, `.t-*`, `.b-*`), and `css/hud.css`
+gives them the HUD colours.
 
 ### Confidentiality
 
@@ -286,9 +303,9 @@ Keep it that way when editing.
 
 - Skip link, semantic landmarks, one `<h1>` per page, headings in order
 - Every diagram carries `<title>` and `<desc>` and is exposed as `role="img"`
-- Visible focus rings; the theme toggle is a real `<button>` with an `aria-label`
+- Visible focus rings; the menu, palette and bot controls are real `<button>`s with labels
 - No dead controls: a link is only rendered as a button when it has somewhere to go
-- Colour pairs meet WCAG AA contrast in both themes
+- Text colours are chosen for contrast on the dark background
 - Wide tables and diagrams scroll inside their own container — the page body never
   scrolls horizontally
 - `prefers-reduced-motion` is respected
